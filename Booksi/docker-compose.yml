@@ -5,8 +5,19 @@ version: '3.4'
 services:
   booksi:
     image: booksi
+    container_name: booksi
     build:
       context: .
       dockerfile: ./Dockerfile
     ports:
       - 5231:5231
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    platform: linux/amd64
+    container_name: mssqlbooksi
+    environment: 
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: Passw0rd
+    ports: 
+      - 1411:1411
+    restart: always
