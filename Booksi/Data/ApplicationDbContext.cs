@@ -12,5 +12,10 @@ public class ApplicationDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder){
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Category>().HasData(
+            new Category {Id = 1, Name = "Historical"},
+            new Category {Id = 2, Name = "Political"},
+            new Category {Id = 3, Name = "SciFi"}
+        ); 
     }
 }
