@@ -1,14 +1,29 @@
 @model List<Category>
 
 <h1> Category Index</h1>
-@foreach(var m in Model){
-    <p>@m.Name</p>
-}
 
 <table class="table table-bordered table-striped"> 
     <tr> 
+        <th> 
+            Id
         <th>
-            Category name aASDAS ASDA aa now aa aa  sadada
+            Category Name
+        </th> 
+        <th>
+            DisplayOrder
         </th>
     </tr>
+    @foreach(var m in Model){
+        <tr>
+            <td>
+               #@m.Id
+            </td>
+            <td>
+                @m.Name
+            </td>
+            <td>
+                @m.DisplayOrder
+            </td>
+        </tr>
+    }
 </table>
