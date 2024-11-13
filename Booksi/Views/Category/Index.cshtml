@@ -3,27 +3,32 @@
 <h1> Category Index</h1>
 
 <table class="table table-bordered table-striped"> 
-    <tr> 
-        <th> 
-            Id
-        <th>
-            Category Name
-        </th> 
-        <th>
-            DisplayOrder
-        </th>
-    </tr>
-    @foreach(var m in Model){
-        <tr>
-            <td>
-               #@m.Id
-            </td>
-            <td>
-                @m.Name
-            </td>
-            <td>
-                @m.DisplayOrder
-            </td>
+    <thead>
+        <tr> 
+            <th> 
+                Id
+            <th>
+                Category Name
+            </th> 
+            <th>
+                DisplayOrder
+            </th>
         </tr>
-    }
+    </thead>
+    <tbody>
+        @foreach(var m in Model.OrderByDescending(x => x.Name)){
+            <tr>
+                <td>
+                #@m.Id
+                </td>
+                <td>
+                    @m.Name
+                </td>
+                <td>
+                    @m.DisplayOrder
+                </td>
+            </tr>
+        }
+    </tbody>
+
 </table>
