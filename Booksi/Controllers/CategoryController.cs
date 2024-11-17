@@ -15,5 +15,8 @@ public class CategoryController : Controller
         return View(categories);
     }
     
+    public IActionResult Create(){
+        return View();
+    }
     
 }
