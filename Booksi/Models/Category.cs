@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,5 +7,6 @@ public class Category{
     public int Id { get; set; }
     [Required]
     public string Name { get; set; }
+    [DisplayName("Display Order")]
     public int DisplayOrder { get; set; }
 }
