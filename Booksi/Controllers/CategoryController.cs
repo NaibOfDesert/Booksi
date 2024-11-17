@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 public class CategoryController : Controller
 {
@@ -21,8 +22,11 @@ public class CategoryController : Controller
     
     [HttpPost]
     public IActionResult Create(Category category){
-        _db.Categories.Add(category);
-        _db.SaveChanges();
-        return RedirectToAction("Index");
+        if(ModelState.IsValid){
+            _db.Categories.Add(category);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        else return View();
     }
 }
