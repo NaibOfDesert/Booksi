@@ -22,6 +22,10 @@ public class CategoryController : Controller
     
     [HttpPost]
     public IActionResult Create(Category category){
+        int result;
+        if(int.TryParse(category.Name,out result)){
+            ModelState.AddModelError("", "Name cannot be a number");
+        }
         if(ModelState.IsValid){
             _db.Categories.Add(category);
             _db.SaveChanges();
