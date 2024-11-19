@@ -33,5 +33,16 @@ public class CategoryController : Controller
         }
         else return View();
     }
+
+    public IActionResult Edit(){
+
+
+        
+        return View();
+    }
+
+    public IActionResult Delete(){
+        return RedirectToAction ("Index"); 
+    }
 }
 
