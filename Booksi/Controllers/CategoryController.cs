@@ -34,14 +34,41 @@ public class CategoryController : Controller
         else return View();
     }
 
-    public IActionResult Edit(){
-
-
-        
-        return View();
+    public IActionResult Edit(int? id){
+        if(id == null || id == 0){
+            return NotFound();
+        }
+        Category? category = _db.Categories.FirstOrDefault(x => x.Id == id);
+        if(category == null){
+            return NotFound();
+        }
+        return View(category);
     }
-
-    public IActionResult Delete(){
+    
+    [HttpPost]
+    public IActionResult Edit(Category category){
+        int result;
+        if(int.TryParse(category.Name,out result)){
+            ModelState.AddModelError("", "Name cannot be a number");
+        }
+        if(ModelState.IsValid){
+            _db.Categories.Update(category);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        else return View();
+    }
+    
+    public IActionResult Delete(int? id){
+        if(id == null || id ==0){
+            return NotFound();
+        }
+        Category? category= _db.Categories.FirstOrDefault(X => X.Id == id);
+        if(category == null){
+            return NotFound();
+        }
+        _db.Categories.Remove(category); 
+        _db.SaveChanges();
         return RedirectToAction ("Index"); 
     }
 }
