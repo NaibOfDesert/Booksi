@@ -29,6 +29,7 @@ public class CategoryController : Controller
         if(ModelState.IsValid){
             _db.Categories.Add(category);
             _db.SaveChanges();
+            TempData["Success"] = "Category Succesfully Created"; 
             return RedirectToAction("Index");
         }
         else return View();
@@ -54,11 +55,15 @@ public class CategoryController : Controller
         if(ModelState.IsValid){
             _db.Categories.Update(category);
             _db.SaveChanges();
+            TempData["Success"] = "Category Succesfully Edited"; 
+
             return RedirectToAction("Index");
         }
         else return View();
     }
     
+
+    [ActionName("Delete")]
     public IActionResult Delete(int? id){
         if(id == null || id ==0){
             return NotFound();
@@ -69,6 +74,7 @@ public class CategoryController : Controller
         }
         _db.Categories.Remove(category); 
         _db.SaveChanges();
+        TempData["Success"] = "Category Succesfully Deleted"; 
         return RedirectToAction ("Index"); 
     }
 }
