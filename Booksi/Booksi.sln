@@ -5,10 +5,6 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Booksi", "Booksi.csproj", "{4DB80374-6744-44A4-99E5-FA84A12B5580}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Models", "Booksi.Models\Booksi.Models.csproj", "{B5CB45EE-2F48-40CE-B5EB-2BA41634C038}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Utility", "Booksi.Utility\Booksi.Utility.csproj", "{36AD90E2-0004-44F3-A127-E4CAF5A6ED81}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{4DB80374-6744-44A4-99E5-FA84A12B5580}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DB80374-6744-44A4-99E5-FA84A12B5580}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DB80374-6744-44A4-99E5-FA84A12B5580}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B5CB45EE-2F48-40CE-B5EB-2BA41634C038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B5CB45EE-2F48-40CE-B5EB-2BA41634C038}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B5CB45EE-2F48-40CE-B5EB-2BA41634C038}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B5CB45EE-2F48-40CE-B5EB-2BA41634C038}.Release|Any CPU.Build.0 = Release|Any CPU
-		{36AD90E2-0004-44F3-A127-E4CAF5A6ED81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{36AD90E2-0004-44F3-A127-E4CAF5A6ED81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{36AD90E2-0004-44F3-A127-E4CAF5A6ED81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{36AD90E2-0004-44F3-A127-E4CAF5A6ED81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
