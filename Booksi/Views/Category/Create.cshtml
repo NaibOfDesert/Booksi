@@ -8,14 +8,14 @@
             </h2>
         </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="row mb-3">
-            <label asp-for="Name">Category Name</label>
+        <div class="form-floating mb-3">
             <input asp-for="Name" type="text" class="form-control"/>
+            <label asp-for="Name">Category Name</label>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        <div class="row mb-3">
-            <label asp-for="DisplayOrder"></label>
+        <div class="form-floating py-2 mb-3">
             <input asp-for="DisplayOrder" type="number" class="form-control" value="1"/>
+            <label asp-for="DisplayOrder"></label>
             <span asp-validation-for="DisplayOrder" class="text-danger"></span>
         </div>
         <div class="row">
