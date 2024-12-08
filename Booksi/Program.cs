@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore; 
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Design; 
+using Booksi.DataAccess;
+using Booksi.Models;
+using Booksi.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,7 +15,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 
-
+ 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
