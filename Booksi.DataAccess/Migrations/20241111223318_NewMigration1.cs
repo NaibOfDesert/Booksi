@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Booksi.Migrations
+namespace Booksi.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class NewMigration1 : Migration

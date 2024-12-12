@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Booksi.Migrations
+namespace Booksi.DataAccess.Migrations
 {
     /// <inheritdoc />
     public partial class Category : Migration
