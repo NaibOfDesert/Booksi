@@ -12,18 +12,18 @@ USER appuser
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["Booksi/Booksi.csproj", "./"]
-COPY ["Booksi.DataAccess/Booksi.DataAccess.csproj", "../Booksi.DataAccess/"]
-COPY ["Booksi.Models/Booksi.Models.csproj", "../Booksi.Models/"]
-COPY ["Booksi.Utility/Booksi.Utility.csproj", "../Booksi.Utility/"]
-RUN dotnet restore "Booksi.csproj"
+COPY ["Booksi/Booksi.csproj", "Booksi/"]
+COPY ["Booksi.DataAccess/Booksi.DataAccess.csproj", "Booksi.DataAccess/"]
+COPY ["Booksi.Models/Booksi.Models.csproj", "Booksi.Models/"]
+COPY ["Booksi.Utility/Booksi.Utility.csproj", "Booksi.Utility/"]
+RUN dotnet restore "Booksi/Booksi.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "Booksi.csproj" -c $configuration -o /app/build
+RUN dotnet build "Booksi/Booksi.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "Booksi.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Booksi/Booksi.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
