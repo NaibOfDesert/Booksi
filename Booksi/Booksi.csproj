@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Booksi.Utility\Booksi.Utility.csproj" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <BaseOutputPath>..\Booski.DataAccess\bin\</BaseOutputPath>
+  </PropertyGroup>
+
 </Project>
