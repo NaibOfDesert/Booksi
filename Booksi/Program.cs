@@ -10,6 +10,12 @@ using Booksi.DataAccess.Repository.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
+/*To use Docekr Compose use connection string with "DefaultConnection"
+ *To use Dotnet Run use connection string with "LocalhostConnection"
+ *To create database migration use dotnet ef --startup-project ../Booksi/ migrations add Initial from terminal in Booksi.DataAccess
+ *To update database use dotnet ef database update from Booksi with connection string "LocalhostConnection"
+**/
+
 // var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection String 'DefaultConnection' not found.");
 var connectionString = builder.Configuration.GetConnectionString("LocalhostConnection") ?? throw new InvalidOperationException("Connection String 'LocalhostConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
