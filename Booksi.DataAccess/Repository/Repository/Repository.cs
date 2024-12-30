@@ -14,11 +14,11 @@ namespace Booksi.DataAccess.Repository.Repository{
             this.dbSet = _db.Set<T>();
         }
         public T Get(Expression<Func<T, bool>> filter){
-            IEnumerable<T> query = dbSet.Where(filter).ToList();
+            IEnumerable<T> query = dbSet.Where(filter);
             return query.FirstOrDefault();
         }
         public IEnumerable<T> GetAll(){
-            return dbSet.ToList();
+            return dbSet;
         }
         public void Add(T item){
             dbSet.Add(item);

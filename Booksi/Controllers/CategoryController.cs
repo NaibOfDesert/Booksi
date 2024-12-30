@@ -17,8 +17,8 @@ public class CategoryController : Controller
     }
 
     public IActionResult Index(){
-        List<Category> categories = _categoryRepository.GetAll();
-        return View(categories);
+        IEnumerable<Category> categories = _categoryRepository.GetAll();
+        return View(categories.ToList());
     }
     
     public IActionResult Create(){
