@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Booksi.DataAccess.Data;
+
 public class CategoryController : Controller
 {
     private readonly ILogger<CategoryController> _logger;

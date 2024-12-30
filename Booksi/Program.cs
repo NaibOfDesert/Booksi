@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore; 
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Design; 
+using Booksi.DataAccess.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
