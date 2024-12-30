@@ -8,7 +8,6 @@ using Booksi.DataAccess.Repository.IRepository;
 public class CategoryController : Controller
 {
     private readonly ILogger<CategoryController> _logger;
-    private readonly ApplicationDbContext _db; 
     private readonly ICategoryRepository _categoryRepository;
     public CategoryController(ILogger<CategoryController> logger, ICategoryRepository categoryRepository)
     {
@@ -17,8 +16,8 @@ public class CategoryController : Controller
     }
 
     public IActionResult Index(){
-        IEnumerable<Category> categories = _categoryRepository.GetAll();
-        return View(categories.ToList());
+        IEnumerable<Category> categories = _categoryRepository.GetAll().ToList();
+        return View(categories);
     }
     
     public IActionResult Create(){

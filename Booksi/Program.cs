@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Design; 
 using Booksi.DataAccess.Data;
+using Booksi.DataAccess.Repository.IRepository;
+using Booksi.DataAccess.Repository.Repository;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,8 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("LocalhostConnection") ?? throw new InvalidOperationException("Connection String 'LocalhostConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
- 
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
