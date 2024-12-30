@@ -1,7 +1,7 @@
 using Booksi.Models; 
 
 namespace Booksi.DataAccess.Repository.IRepository{
-    internal interface ICategoryRepository: IRepository<Category>{
+    public interface ICategoryRepository: IRepository<Category>{
         void Save(); 
     }
 }

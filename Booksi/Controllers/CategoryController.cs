@@ -1,19 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Booksi.DataAccess.Data;
+using Booksi.DataAccess.Repository.Repository;
+using Booksi.DataAccess.Repository.IRepository;
+
 
 public class CategoryController : Controller
 {
     private readonly ILogger<CategoryController> _logger;
     private readonly ApplicationDbContext _db; 
-    public CategoryController(ILogger<CategoryController> logger, ApplicationDbContext db)
+    private readonly ICategoryRepository _categoryRepository;
+    public CategoryController(ILogger<CategoryController> logger, ICategoryRepository categoryRepository)
     {
         _logger = logger;
-        _db = db;
+        _categoryRepository = categoryRepository;
     }
 
     public IActionResult Index(){
-        List<Category> categories = _db.Categories.ToList();
+        List<Category> categories = _categoryRepository.GetAll();
         return View(categories);
     }
     
@@ -28,8 +32,8 @@ public class CategoryController : Controller
             ModelState.AddModelError("", "Name cannot be a number");
         }
         if(ModelState.IsValid){
-            _db.Categories.Add(category);
-            _db.SaveChanges();
+            _categoryRepository.Add(category);
+            _categoryRepository.Save();
             TempData["Success"] = "Category Succesfully Created"; 
             return RedirectToAction("Index");
         }
@@ -40,7 +44,7 @@ public class CategoryController : Controller
         if(id == null || id == 0){
             return NotFound();
         }
-        Category? category = _db.Categories.FirstOrDefault(x => x.Id == id);
+        Category? category = _categoryRepository.Get(x => x.Id == id);
         if(category == null){
             return NotFound();
         }
@@ -54,8 +58,8 @@ public class CategoryController : Controller
             ModelState.AddModelError("", "Name cannot be a number");
         }
         if(ModelState.IsValid){
-            _db.Categories.Update(category);
-            _db.SaveChanges();
+            _categoryRepository.Update(category);
+            _categoryRepository.Save();
             TempData["Success"] = "Category Succesfully Edited"; 
 
             return RedirectToAction("Index");
@@ -69,12 +73,12 @@ public class CategoryController : Controller
         if(id == null || id ==0){
             return NotFound();
         }
-        Category? category= _db.Categories.FirstOrDefault(X => X.Id == id);
+        Category? category= _categoryRepository.Get(x => x.Id == id);
         if(category == null){
             return NotFound();
         }
-        _db.Categories.Remove(category); 
-        _db.SaveChanges();
+        _categoryRepository.Delete(category); 
+        _categoryRepository.Save();
         TempData["Success"] = "Category Succesfully Deleted"; 
         return RedirectToAction ("Index"); 
     }
