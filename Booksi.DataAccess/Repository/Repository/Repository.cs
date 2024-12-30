@@ -5,23 +5,27 @@ namespace Booksi.DataAccess.Repository.Repository{
     public class Repository<T> : IRepository<T> where T : class
     {
         // Dependency Injection
+        private readonly ApplicationDbContext _db; 
 
-        T Get(Expression<Func<T, bool>> filter){
-            return Get(filter, null);
+        public Repository(ApplicationDbContext db){
+            _db = db;
         }
-        IEnumerable <T> GetAll(){
-            return GetAll(null);
+        public T Get(Expression<Func<T, bool>> filter){
+            throw new NotImplementedException();
         }
-        void Add(T item){
-
+        public IEnumerable<T> GetAll(){
+            throw new NotImplementedException();
         }
-        void Update(T item){
-
-        }
-        void Delete(T item){
+        public void Add(T item){
 
         }
-        void DeleteMany(IEnumerable<T> items){
+        public void Update(T item){
+
+        }
+        public void Delete(T item){
+
+        }
+        public void DeleteMany(IEnumerable<T> items){
             
         }
     }
