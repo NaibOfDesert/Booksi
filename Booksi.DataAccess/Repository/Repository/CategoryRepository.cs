@@ -8,8 +8,5 @@ namespace Booksi.DataAccess.Repository.Repository{
         public CategoryRepository(ApplicationDbContext db) : base(db){
            this. _db = db;
         }
-        public void Save(){
-            _db.SaveChanges();
-        }
     }
 }
