@@ -1,7 +1,10 @@
 
 
 namespace Booski.DataAccess.Repository.IRepository{
-    void ICategoryRepository categoryRepository {get; private set;}
+    internal interface IUnitOfWork{
+        ICategoryRepository categoryRepository {get;}
 
-    void Save(); 
+        void Save(); 
+    }
+
 }
