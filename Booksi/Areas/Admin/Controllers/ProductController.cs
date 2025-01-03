@@ -1,18 +1,18 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Booksi.DataAccess.Data;
 using Booksi.DataAccess.Repository.Repository;
 using Booksi.DataAccess.Repository.IRepository;
 using Booski.DataAccess.Repository.IRepository;
+using Booksi.Models;
 
 namespace Booksi.Areas.Admin.Controllers{
     [Area("Admin")]
-    public class CategoryController : Controller
+    public class ProductController : Controller
     {
-        private readonly ILogger<CategoryController> _logger;
+        private readonly ILogger<ProductController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(ILogger<CategoryController> logger, IUnitOfWork unitOfWork)
+        public ProductController(ILogger<ProductController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

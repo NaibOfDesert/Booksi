@@ -3,10 +3,10 @@ using Booksi.DataAccess.Data;
 using Booksi.Models;
 
 namespace Booksi.DataAccess.Repository.Repository{
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class BookRepository : Repository<Book>, IBookRepository
     {
         private readonly ApplicationDbContext _db;
-        public CategoryRepository(ApplicationDbContext db) : base(db){
+        public BookRepository(ApplicationDbContext db) : base(db){
            this. _db = db;
         }
     }

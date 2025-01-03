@@ -4,6 +4,7 @@ using Booksi.DataAccess.Data;
 using Booksi.DataAccess.Repository.Repository;
 using Booksi.DataAccess.Repository.IRepository;
 using Booski.DataAccess.Repository.IRepository;
+using Booksi.Models;
 
 namespace Booksi.Areas.Admin.Controllers{
     [Area("Admin")]
