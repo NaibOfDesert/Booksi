@@ -19,8 +19,8 @@ namespace Booksi.Areas.Admin.Controllers{
         }
 
         public IActionResult Index(){
-            IEnumerable<Category> categories = _unitOfWork.categoryRepository.GetAll().ToList();
-            return View(categories);
+            IEnumerable<Book> books = _unitOfWork.bookRepository.GetAll().ToList();
+            return View(books);
         }
         
         public IActionResult Create(){
@@ -28,13 +28,13 @@ namespace Booksi.Areas.Admin.Controllers{
         }
         
         [HttpPost]
-        public IActionResult Create(Category category){
+        public IActionResult Create(Book book){
             int result;
-            if(int.TryParse(category.Name,out result)){
-                ModelState.AddModelError("", "Name cannot be a number");
+            if(int.TryParse(book.Title,out result)){
+                ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){
-                _unitOfWork.categoryRepository.Add(category);
+                _unitOfWork.bookRepository.Add(book);
                 _unitOfWork.Save();
                 TempData["Success"] = "Category Succesfully Created"; 
                 return RedirectToAction("Index");
@@ -46,21 +46,21 @@ namespace Booksi.Areas.Admin.Controllers{
             if(id == null || id == 0){
                 return NotFound();
             }
-            Category? category = _unitOfWork.categoryRepository.Get(x => x.Id == id);
-            if(category == null){
+            Book? book = _unitOfWork.bookRepository.Get(x => x.Id == id);
+            if(book == null){
                 return NotFound();
             }
-            return View(category);
+            return View(book);
         }
         
         [HttpPost]
-        public IActionResult Edit(Category category){
+        public IActionResult Edit(Book book){
             int result;
-            if(int.TryParse(category.Name,out result)){
-                ModelState.AddModelError("", "Name cannot be a number");
+            if(int.TryParse(book.Title,out result)){
+                ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){
-                _unitOfWork.categoryRepository.Update(category);
+                _unitOfWork.bookRepository.Update(book);
                 _unitOfWork.Save();
                 TempData["Success"] = "Category Succesfully Edited"; 
 
@@ -75,11 +75,11 @@ namespace Booksi.Areas.Admin.Controllers{
             if(id == null || id ==0){
                 return NotFound();
             }
-            Category? category= _unitOfWork.categoryRepository.Get(x => x.Id == id);
-            if(category == null){
+            Book? book= _unitOfWork.bookRepository.Get(x => x.Id == id);
+            if(book == null){
                 return NotFound();
             }
-            _unitOfWork.categoryRepository.Delete(category); 
+            _unitOfWork.bookRepository.Delete(book); 
             _unitOfWork.Save();
             TempData["Success"] = "Category Succesfully Deleted"; 
             return RedirectToAction ("Index"); 
