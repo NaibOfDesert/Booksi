@@ -4,8 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.EntityFrameworkCore.Design; 
 using Booksi.DataAccess.Data;
-using Booksi.DataAccess.Repository.IRepository;
 using Booksi.DataAccess.Repository.Repository;
+using Booksi.DataAccess.Repository.IRepository;
+using Booski.DataAccess.Repository.IRepository;
 
 /* Program basic run informations:
  * To use Docekr Compose use connection string with "DefaultConnection".
