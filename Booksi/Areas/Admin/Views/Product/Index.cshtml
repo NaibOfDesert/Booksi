@@ -1,0 +1,70 @@
+@model List<Category>
+
+<h1> Category Index</h1>
+<partial name="_Notification"/>
+
+<div class="container"> 
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">
+                Category List
+            </h2>
+        </div>
+        <div class="col-6">
+            <h2 class="text-end"> 
+                <a asp-asp-area="Admin" asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                    <i class="bi bi-file-earmark-plus-fill">New Category</i> 
+                </a>
+            </h2>
+        </div>
+
+
+    </div>
+
+
+
+</div>
+<table class="table table-bordered table-striped"> 
+    <thead>
+        <tr> 
+            <th> 
+                Id
+            <th>
+                Category Name
+            </th> 
+            <th>
+                DisplayOrder
+            </th>
+            <th>
+                Options
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var m in Model.OrderByDescending(x => x.Name)){
+            <tr>
+                <td>
+                #@m.Id
+                </td>
+                <td>
+                    @m.Name
+                </td>
+                <td>
+                    @m.DisplayOrder
+                </td>
+                <td>
+                    <div class="w-100 btn-group" role="group">
+
+                    </div>
+                    <a asp-asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@m.Id" class="btn btn-primary">
+                        <i class="bi bi-pencil-square"></i>
+                    </a>
+                    <a asp-asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@m.Id" class="btn btn-primary">
+                        <i class="bi bi-file-earmark-x"></i>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
