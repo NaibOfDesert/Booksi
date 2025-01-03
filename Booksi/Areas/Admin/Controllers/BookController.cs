@@ -8,11 +8,11 @@ using Booksi.Models;
 
 namespace Booksi.Areas.Admin.Controllers{
     [Area("Admin")]
-    public class ProductController : Controller
+    public class BookController : Controller
     {
-        private readonly ILogger<ProductController> _logger;
+        private readonly ILogger<BookController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public ProductController(ILogger<ProductController> logger, IUnitOfWork unitOfWork)
+        public BookController(ILogger<BookController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
