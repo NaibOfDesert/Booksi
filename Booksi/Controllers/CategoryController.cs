@@ -8,10 +8,12 @@ using Booksi.DataAccess.Repository.IRepository;
 public class CategoryController : Controller
 {
     private readonly ILogger<CategoryController> _logger;
+    private readonly IUnitOfWork _unitOfWork;
     private readonly ICategoryRepository _categoryRepository;
-    public CategoryController(ILogger<CategoryController> logger, ICategoryRepository categoryRepository)
+    public CategoryController(ILogger<CategoryController> logger, ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
     {
         _logger = logger;
+        _unitOfWork = unitOfWork;
         _categoryRepository = categoryRepository;
     }
 
@@ -32,7 +34,7 @@ public class CategoryController : Controller
         }
         if(ModelState.IsValid){
             _categoryRepository.Add(category);
-            _categoryRepository.Save();
+            _unitOfWork.Save();
             TempData["Success"] = "Category Succesfully Created"; 
             return RedirectToAction("Index");
         }
@@ -58,7 +60,7 @@ public class CategoryController : Controller
         }
         if(ModelState.IsValid){
             _categoryRepository.Update(category);
-            _categoryRepository.Save();
+            _unitOfWork.Save();
             TempData["Success"] = "Category Succesfully Edited"; 
 
             return RedirectToAction("Index");
@@ -77,7 +79,7 @@ public class CategoryController : Controller
             return NotFound();
         }
         _categoryRepository.Delete(category); 
-        _categoryRepository.Save();
+        _unitOfWork.Save();
         TempData["Success"] = "Category Succesfully Deleted"; 
         return RedirectToAction ("Index"); 
     }

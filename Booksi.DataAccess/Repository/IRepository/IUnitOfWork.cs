@@ -1,7 +1,9 @@
 
 
+using Booksi.DataAccess.Repository.IRepository;
+
 namespace Booski.DataAccess.Repository.IRepository{
-    internal interface IUnitOfWork{
+    public interface IUnitOfWork{
         ICategoryRepository categoryRepository {get;}
 
         void Save(); 

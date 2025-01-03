@@ -1,9 +1,9 @@
 
-using Booksi.DataAccess.Repository.IRepository;
 using Booksi.DataAccess.Data;
+using Booski.DataAccess.Repository.IRepository;
 
 namespace Booksi.DataAccess.Repository.Repository{
-    public class UnitOfWork() : IUnitOfWork{
+    public class UnitOfWork : IUnitOfWork{
         public ApplicationDbContext _db; 
         public ICategoryRepository categoryRepository {get; private set;} 
 
