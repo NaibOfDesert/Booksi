@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Booksi.DataAccess.Data;
 using Booksi.DataAccess.Repository.Repository;
 using Booksi.DataAccess.Repository.IRepository;
 using Booski.DataAccess.Repository.IRepository;
-using Booksi.Models;
+using Booksi.Models.Model;
+using Booksi.Models.ViewModel;
 
 namespace Booksi.Areas.Admin.Controllers{
     [Area("Admin")]
@@ -24,13 +26,19 @@ namespace Booksi.Areas.Admin.Controllers{
         }
         
         public IActionResult Create(){
+            IEnumerable<SelectListItem> categories = _unitOfWork.categoryRepository.GetAll().Select(
+                x => new SelectListItem{ 
+                    Text = x.Name, 
+                    Value = x.Id.ToString() 
+                });
+            ViewBag.categories = categories;
             return View();
         }
         
         [HttpPost]
         public IActionResult Create(Book book){
             int result;
-            if(int.TryParse(book.Title,out result)){
+            if(int.TryParse(book.Title, out result)){
                 ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){

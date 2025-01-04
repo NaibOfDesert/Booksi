@@ -1,4 +1,4 @@
-@model Book
+@model Booksi.Models.ViewModel.BookVM
 
 <form method="post">
     <div class="border p-3 mt-4">
@@ -9,34 +9,46 @@
         </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-floating mb-3">
-            <input asp-for="Title" type="text" class="form-control"/>
-            <label asp-for="Title">Title</label>
-            <span asp-validation-for="Title" class="text-danger"></span>
+            <input asp-for="Book.Title" class="form-control"/>
+            <label asp-for="Book.Title"></label>
+            <span asp-validation-for="Book.Title" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="Author" type="text" class="form-control"/>
-            <label asp-for="Author">Author</label>
-            <span asp-validation-for="Author" class="text-danger"></span>
+            <input asp-for="Book.Author" class="form-control"/>
+            <label asp-for="Book.Author"></label>
+            <span asp-validation-for="Book.Author" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="ISBN" type="number" class="form-control"/>
-            <label asp-for="ISBN">ISBN</label>
-            <span asp-validation-for="ISBN" class="text-danger"></span>
+            <input asp-for="Book.ISBN" class="form-control"/>
+            <label asp-for="Book.ISBN"></label>
+            <span asp-validation-for="Book.ISBN" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="Description" type="text" class="form-control"/>
-            <label asp-for="Description">Description</label>
-            <span asp-validation-for="Description" class="text-danger"></span>
+            <input asp-for="Book.Description" class="form-control"/>
+            <label asp-for="Book.Description"></label>
+            <span asp-validation-for="Book.Description" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="Price" type="number" class="form-control" value="1"/>
-            <label asp-for="Price">Price</label>
-            <span asp-validation-for="Price" class="text-danger"></span>
+            <input asp-for="Book.Price" class="form-control" value="1"/>
+            <label asp-for="Book.Price"></label>
+            <span asp-validation-for="Book.Price" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="ExtraPrice" type="number" class="form-control" value="1"/>
-            <label asp-for="ExtraPrice">Extra Price</label>
-            <span asp-validation-for="ExtraPrice" class="text-danger"></span>
+            <input asp-for="Book.ExtraPrice" class="form-control" value="1"/>
+            <label asp-for="Book.ExtraPrice"></label>
+            <span asp-validation-for="Book.ExtraPrice" class="text-danger"></span>
+        </div>
+        <div class="form-floating py-2 mb-3">
+            <input asp-for="Book.ImageUrl" class="form-control" value="1"/>
+            <label asp-for="Book.ImageUrl"></label>
+            <span asp-validation-for="Book.ImageUrl" class="text-danger"></span>
+        </div>
+        <div class="form-floating py-2 mb-3">
+            <select asp-for="Book.CategoryId" asp-items="ViewBag.categories" class="form-control" value="1">
+                <option disabled selected>Select Category</option>
+            </select>
+            <label asp-for="Book.CategoryId"></label>
+            <span asp-validation-for="Book.CategoryId" class="text-danger"></span>
         </div>
         <div class="row">
             <div class="col-2 col-md-3">

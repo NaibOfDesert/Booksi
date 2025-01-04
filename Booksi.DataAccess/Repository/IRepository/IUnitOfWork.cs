@@ -1,6 +1,6 @@
 
 using Booksi.DataAccess.Repository.IRepository;
-using Booksi.Models;
+using Booksi.Models.Model;
 
 namespace Booski.DataAccess.Repository.IRepository{
     public interface IUnitOfWork{

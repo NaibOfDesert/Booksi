@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
-using Booksi.Models;
+using Booksi.Models.Model;
 
 namespace Booksi.DataAccess.Data{
     public class ApplicationDbContext : DbContext

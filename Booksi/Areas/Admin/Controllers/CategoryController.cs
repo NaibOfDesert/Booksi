@@ -1,10 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Booksi.DataAccess.Data;
 using Booksi.DataAccess.Repository.Repository;
 using Booksi.DataAccess.Repository.IRepository;
 using Booski.DataAccess.Repository.IRepository;
-using Booksi.Models;
+using Booksi.Models.Model;
+using Booksi.Models.ViewModel;
 
 namespace Booksi.Areas.Admin.Controllers{
     [Area("Admin")]

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace Booksi.Models{
+namespace Booksi.Models.Model{
     public class Book{
         [Key]
         public int Id { get; set; }

@@ -1,6 +1,6 @@
 using Booksi.DataAccess.Repository.IRepository;
 using Booksi.DataAccess.Data;
-using Booksi.Models;
+using Booksi.Models.Model;
 
 namespace Booksi.DataAccess.Repository.Repository{
     public class BookRepository : Repository<Book>, IBookRepository

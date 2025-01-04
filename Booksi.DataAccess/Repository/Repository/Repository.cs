@@ -2,7 +2,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore; 
 using Booksi.DataAccess.Repository.IRepository;
 using Booksi.DataAccess.Data;
-using Booksi.Models;
+using Booksi.Models.Model;
 
 namespace Booksi.DataAccess.Repository.Repository{
     public class Repository<T> : IRepository<T> where T : class

@@ -1,4 +1,4 @@
-@model List<Book>
+@model List<Booksi.Models.Model.Book>
 
 <h1> Category Index</h1>
 <partial name="_Notification"/>
@@ -48,6 +48,12 @@
                 Extra Price
             </th>
             <th>
+                ImageUrl
+            </th>
+            <th>
+                Category
+            </th>
+            <th>
                 
             </th>
         </tr>
@@ -75,6 +81,12 @@
                 </td>
                 <td>
                     @m.ExtraPrice
+                </td>
+                <td>
+                    @m.ImageUrl
+                </td>
+                <td>
+                    @m.CategoryId
                 </td>
                 <td>
                     <div class="w-100 btn-group" role="group">

@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.EntityFrameworkCore;
 
-namespace Booksi.Models{
+namespace Booksi.Models.Model{
     public class Category{
         [Key]
         public int Id { get; set; }
