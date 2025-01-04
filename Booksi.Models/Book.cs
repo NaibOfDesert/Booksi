@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
 namespace Booksi.Models{
@@ -20,5 +21,9 @@ namespace Booksi.Models{
         [Range(1, 5000)]
         [Display(Name = "Extra Price")]
         public double ExtraPrice {get; set; }
+        public string ImageUrl { get; set; }
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category Category { get; set; }
     }
 }

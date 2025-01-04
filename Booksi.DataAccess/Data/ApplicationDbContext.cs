@@ -43,7 +43,9 @@ namespace Booksi.DataAccess.Data{
                         The accounts of how the United States got involved and how Hitler used Mussolini and Japan are astonishing, and the 
                         coverage of the war-from Germany's early successes to her eventual defeat-is must reading.",
                     Price = 100,
-                    ExtraPrice = 80
+                    ExtraPrice = 80,
+                    ImageUrl = "", 
+                    CategoryId = 1
                 }
             ); 
         }
