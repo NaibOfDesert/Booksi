@@ -1,13 +1,14 @@
-@model Booksi.Models.ViewModel.BookVM
+@model BookVM
 
-<form method="post">
+@*enctype="multipart/form-data" for images*@
+<form method="post" enctype="multipart/form-data">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">
                 Create Book
             </h2>
         </div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
         <div class="form-floating mb-3">
             <input asp-for="Book.Title" class="form-control"/>
             <label asp-for="Book.Title"></label>
@@ -29,22 +30,21 @@
             <span asp-validation-for="Book.Description" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="Book.Price" class="form-control" value="1"/>
+            <input asp-for="Book.Price" class="form-control"/>
             <label asp-for="Book.Price"></label>
             <span asp-validation-for="Book.Price" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="Book.ExtraPrice" class="form-control" value="1"/>
+            <input asp-for="Book.ExtraPrice" class="form-control"/>
             <label asp-for="Book.ExtraPrice"></label>
             <span asp-validation-for="Book.ExtraPrice" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input asp-for="Book.ImageUrl" class="form-control" value="1"/>
+            <input type="file" class="form-control"/>
             <label asp-for="Book.ImageUrl"></label>
-            <span asp-validation-for="Book.ImageUrl" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <select asp-for="Book.CategoryId" asp-items="ViewBag.categories" class="form-control" value="1">
+            <select asp-for="Book.CategoryId" asp-items="@Model.Categories" class="form-control">
                 <option disabled selected>Select Category</option>
             </select>
             <label asp-for="Book.CategoryId"></label>

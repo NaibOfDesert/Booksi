@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace Booksi.Models.Model{
@@ -21,9 +22,11 @@ namespace Booksi.Models.Model{
         [Range(1, 5000)]
         [Display(Name = "Extra Price")]
         public double ExtraPrice {get; set; }
+        [ValidateNever] // TOSOLVE: why ValidateNever
         public string ImageUrl { get; set; }
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
+        [ValidateNever] // TOSOLVE: why ValidateNever
         public Category Category { get; set; }
     }
 }

@@ -11,8 +11,8 @@ using Booski.DataAccess.Repository.IRepository;
 /* Program basic run informations:
  * To use Docekr Compose use connection string with "DefaultConnection".
  * To use Dotnet Run use connection string with "LocalhostConnection".
- * To create database migration use dotnet ef --startup-project ../Booksi/ migrations add Initial from terminal in Booksi.DataAccess.
- * To update database use dotnet ef database update from Booksi with connection string "LocalhostConnection".
+ * To create database migration use dotnet ef --startup-project ../Booksi/ migrations add Initial from terminal in ../Booksi.DataAccess/.
+ * To update database use dotnet ef database update from ../Booksi/ with connection string "LocalhostConnection".
 **/
 
 /* Program possible errors informations:

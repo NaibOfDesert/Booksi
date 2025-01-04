@@ -32,19 +32,23 @@ namespace Booksi.Areas.Admin.Controllers{
                     Value = x.Id.ToString() 
                 });
             ViewBag.categories = categories;
-            return View();
+            BookVM bookVM = new (){
+                Book = new Book(),
+                Categories = categories
+            };
+            return View(bookVM);
         }
         
         [HttpPost]
-        public IActionResult Create(Book book){
+        public IActionResult Create(BookVM bookVM){
             int result;
-            if(int.TryParse(book.Title, out result)){
+            if(int.TryParse(bookVM.Book.Title, out result)){
                 ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){
-                _unitOfWork.bookRepository.Add(book);
+                _unitOfWork.bookRepository.Add(bookVM.Book);
                 _unitOfWork.Save();
-                TempData["Success"] = "Category Succesfully Created"; 
+                TempData["Success"] = "Book Succesfully Created"; 
                 return RedirectToAction("Index");
             }
             else return View();
@@ -58,19 +62,31 @@ namespace Booksi.Areas.Admin.Controllers{
             if(book == null){
                 return NotFound();
             }
-            return View(book);
+
+            IEnumerable<SelectListItem> categories = _unitOfWork.categoryRepository.GetAll().Select(
+                x => new SelectListItem{ 
+                    Text = x.Name, 
+                    Value = x.Id.ToString() 
+                });
+            ViewBag.categories = categories;
+
+            BookVM bookVM = new(){
+                Book = book,
+                Categories = categories 
+            };
+            return View(bookVM);
         }
         
         [HttpPost]
-        public IActionResult Edit(Book book){
+        public IActionResult Edit(BookVM bookVM){
             int result;
-            if(int.TryParse(book.Title,out result)){
+            if(int.TryParse(bookVM.Book.Title,out result)){
                 ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){
-                _unitOfWork.bookRepository.Update(book);
+                _unitOfWork.bookRepository.Update(bookVM.Book);
                 _unitOfWork.Save();
-                TempData["Success"] = "Category Succesfully Edited"; 
+                TempData["Success"] = "Book Succesfully Edited"; 
 
                 return RedirectToAction("Index");
             }
@@ -89,7 +105,7 @@ namespace Booksi.Areas.Admin.Controllers{
             }
             _unitOfWork.bookRepository.Delete(book); 
             _unitOfWork.Save();
-            TempData["Success"] = "Category Succesfully Deleted"; 
+            TempData["Success"] = "Book Succesfully Deleted"; 
             return RedirectToAction ("Index"); 
         }
     }
