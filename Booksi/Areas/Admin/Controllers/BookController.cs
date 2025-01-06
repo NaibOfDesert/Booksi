@@ -44,6 +44,9 @@ namespace Booksi.Areas.Admin.Controllers{
             else {
                 // Update
                 bookVM.Book = _unitOfWork.bookRepository.Get(x => x.Id == id);
+                if(bookVM.Book == null){
+                    return NotFound();
+                }
                 return View(bookVM);
             }
         }
@@ -55,17 +58,24 @@ namespace Booksi.Areas.Admin.Controllers{
                 ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){
+                if(image != null){
+                    string wwwRootPath = _webHostEnvironment.WebRootPath; 
+                    if(!string.IsNullOrEmpty(bookVM.Book.ImageUrl)){
+                        string imageUrl = Path.Combine(wwwRootPath, bookVM.Book.ImageUrl.TrimStart('\\'));
+                        if(System.IO.File.Exists(imageUrl)){
+                            System.IO.File.Delete(imageUrl);
+                        }
+                    }
+                    string imageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                    string bookImagePath = Path.Combine(wwwRootPath, @"img/Books");
+                    using (var fileStream = new FileStream(Path.Combine(bookImagePath, imageName), FileMode.Create)){
+                        image.CopyTo(fileStream);
+                    };
+                    bookVM.Book.ImageUrl = @"/img/Books/" + imageName;
+                }
+
                 if(bookVM.Book.Id == null || bookVM.Book.Id == 0){
                     // Create
-                    string wwwRootPath = _webHostEnvironment.WebRootPath; 
-                    if(image != null){
-                        string imageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
-                        string bookImagePath = Path.Combine(wwwRootPath, @"img\Books");
-                        using (var fileStream = new FileStream(Path.Combine(bookImagePath, imageName), FileMode.Create)){
-                            fileStream.CopyTo(fileStream);
-                        };
-                        bookVM.Book.ImageUrl = @"\img\Books\" + imageName;
-                    }
                     _unitOfWork.bookRepository.Add(bookVM.Book);
                     TempData["Success"] = "Book Succesfully Created"; 
                 }

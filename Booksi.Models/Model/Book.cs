@@ -14,7 +14,7 @@ namespace Booksi.Models.Model{
         public string Author { get; set; }
         [Required]
         public double ISBN { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         [Required]
         [Range(1, 5000)]
         public double Price {get; set; }
