@@ -14,8 +14,10 @@ namespace Booksi.Areas.Admin.Controllers{
     {
         private readonly ILogger<BookController> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public BookController(ILogger<BookController> logger, IUnitOfWork unitOfWork)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public BookController(IWebHostEnvironment webHostEnvironment, ILogger<BookController> logger, IUnitOfWork unitOfWork)
         {
+            _webHostEnvironment = webHostEnvironment;
             _logger = logger;
             _unitOfWork = unitOfWork;
         }
@@ -47,14 +49,23 @@ namespace Booksi.Areas.Admin.Controllers{
         }
         
         [HttpPost]
-        public IActionResult Upsert(BookVM bookVM, IFormFile? formFile){
+        public IActionResult Upsert(BookVM bookVM, IFormFile? image){
             int result;
             if(int.TryParse(bookVM.Book.Title, out result)){
                 ModelState.AddModelError("", "Title cannot be a number");
             }
             if(ModelState.IsValid){
-                if(bookVM.Book.Id == null || bookVM.Book.Id  == 0){
+                if(bookVM.Book.Id == null || bookVM.Book.Id == 0){
                     // Create
+                    string wwwRootPath = _webHostEnvironment.WebRootPath; 
+                    if(image != null){
+                        string imageName = Guid.NewGuid().ToString() + Path.GetExtension(image.FileName);
+                        string bookImagePath = Path.Combine(wwwRootPath, @"img\Books");
+                        using (var fileStream = new FileStream(Path.Combine(bookImagePath, imageName), FileMode.Create)){
+                            fileStream.CopyTo(fileStream);
+                        };
+                        bookVM.Book.ImageUrl = @"\img\Books\" + imageName;
+                    }
                     _unitOfWork.bookRepository.Add(bookVM.Book);
                     TempData["Success"] = "Book Succesfully Created"; 
                 }

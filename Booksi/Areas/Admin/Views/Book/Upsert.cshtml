@@ -6,13 +6,7 @@
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">
-                @{if(Model.Book.Id != 0){
-                    <div>Create Book</div>
-                    }
-                    else {
-                    <div>Edit Book</div>
-                    }
-                }
+                @(Model.Book.Id!=0?"Edit Book" : "Create Book")
             </h2>
         </div>
         @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
@@ -45,7 +39,7 @@
             <span asp-validation-for="Book.ExtraPrice" class="text-danger"></span>
         </div>
         <div class="form-floating py-2 mb-3">
-            <input type="file" class="form-control"/>
+            <input type="file" name="image" class="form-control"/>
             <label asp-for="Book.ImageUrl"></label>
         </div>
         <div class="form-floating py-2 mb-3">
