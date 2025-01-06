@@ -2,10 +2,17 @@
 
 @*enctype="multipart/form-data" for images*@
 <form method="post" enctype="multipart/form-data">
+<input asp-for="Book.Id" hidden />
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">
-                Create Book
+                @{if(Model.Book.Id != 0){
+                    <div>Create Book</div>
+                    }
+                    else {
+                    <div>Edit Book</div>
+                    }
+                }
             </h2>
         </div>
         @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
@@ -52,9 +59,18 @@
         </div>
         <div class="row">
             <div class="col-2 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">
-                    Submit
-                </button>
+                @if(Model.Book.Id!=0){
+                    <button type="submit" class="btn btn-primary form-control">
+                        Update
+                    </button>
+                }
+                else 
+                {
+                    <button type="submit" class="btn btn-primary form-control">
+                        Create
+                    </button>
+                }
+
             </div>
             <div class="col-2 col-md-3">
                 <a asp-asp-area="Admin" asp-controller="Book" asp-action="Index" class="btn btn-secondary form-control">

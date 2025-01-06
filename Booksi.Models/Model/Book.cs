@@ -23,7 +23,7 @@ namespace Booksi.Models.Model{
         [Display(Name = "Extra Price")]
         public double ExtraPrice {get; set; }
         [ValidateNever] // TOSOLVE: why ValidateNever
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
         public int CategoryId { get; set; }
         [ForeignKey("CategoryId")]
         [ValidateNever] // TOSOLVE: why ValidateNever
