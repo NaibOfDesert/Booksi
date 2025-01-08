@@ -61,7 +61,7 @@ namespace Booksi.Areas.Admin.Controllers{
                 if(image != null){
                     string wwwRootPath = _webHostEnvironment.WebRootPath; 
                     if(!string.IsNullOrEmpty(bookVM.Book.ImageUrl)){
-                        string imageUrl = Path.Combine(wwwRootPath, bookVM.Book.ImageUrl.TrimStart('\\'));
+                        string imageUrl = Path.Combine(wwwRootPath, bookVM.Book.ImageUrl.TrimStart('/'));
                         if(System.IO.File.Exists(imageUrl)){
                             System.IO.File.Delete(imageUrl);
                         }
