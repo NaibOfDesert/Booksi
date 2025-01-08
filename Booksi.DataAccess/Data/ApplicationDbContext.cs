@@ -7,7 +7,7 @@ namespace Booksi.DataAccess.Data{
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Category> Categories{ get; set; }
-        public DbSet<Book> Products{ get; set; }
+        public DbSet<Book> Books{ get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){
 

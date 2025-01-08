@@ -13,6 +13,7 @@ namespace Booksi.DataAccess.Repository.Repository{
         public Repository(ApplicationDbContext db){
             this._db = db;
             this.dbSet = _db.Set<T>();
+
         }
         public T Get(Expression<Func<T, bool>> filter){
             IEnumerable<T> query = dbSet.Where(filter);
