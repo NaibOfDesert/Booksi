@@ -23,7 +23,7 @@ namespace Booksi.Areas.Admin.Controllers{
         }
 
         public IActionResult Index(){
-            IEnumerable<Book> books = _unitOfWork.bookRepository.GetAll().ToList();
+            IEnumerable<Book> books = _unitOfWork.bookRepository.GetAll(include:"Category").ToList();
             return View(books);
         }
         
