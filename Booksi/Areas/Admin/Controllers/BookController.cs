@@ -99,6 +99,13 @@ namespace Booksi.Areas.Admin.Controllers{
             if(book == null){
                 return NotFound();
             }
+            if(!string.IsNullOrEmpty(book.ImageUrl)){
+                string wwwRootPath = _webHostEnvironment.WebRootPath; 
+                string imageUrl = Path.Combine(wwwRootPath, book.ImageUrl.TrimStart('/'));
+                if(System.IO.File.Exists(imageUrl)){
+                    System.IO.File.Delete(imageUrl);
+                }
+            }
             _unitOfWork.bookRepository.Delete(book); 
             _unitOfWork.Save();
             TempData["Success"] = "Book Succesfully Deleted"; 
