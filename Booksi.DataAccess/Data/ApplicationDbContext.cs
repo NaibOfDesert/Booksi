@@ -4,7 +4,7 @@ using Microsoft.Extensions.Options;
 using Booksi.Models.Model;
 
 namespace Booksi.DataAccess.Data{
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Book> Books{ get; set; }
@@ -14,6 +14,7 @@ namespace Booksi.DataAccess.Data{
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){
+            // Configuration to Identity
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Category>().HasData(
