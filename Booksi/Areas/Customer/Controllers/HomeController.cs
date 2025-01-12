@@ -1,20 +1,39 @@
 ﻿using System.Diagnostics;
+using Booski.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
+using Booksi.DataAccess.Repository.IRepository;
+using Booksi.DataAccess.Repository.Repository; 
+using Booksi.Models.Model;
+using Booksi.Models.ViewModel; 
 
 namespace Booksi.Areas.Customer.Controllers{
     [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
+            _unitOfWork = unitOfWork;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Book> books = _unitOfWork.bookRepository.GetAll(include: "Category");
+            return View(books);
+        }
+
+        public IActionResult Details(int? id){
+            if(id == null || id == 0){
+                return NotFound(); 
+            }
+            Book book = _unitOfWork.bookRepository.Get(x => x.Id == id, include: "Category");
+            if(book == null){
+                return NotFound();
+            }
+            return View(book);
         }
 
         public IActionResult Privacy()
