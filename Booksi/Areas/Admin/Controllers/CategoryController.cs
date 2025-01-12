@@ -24,53 +24,45 @@ namespace Booksi.Areas.Admin.Controllers{
             IEnumerable<Category> categories = _unitOfWork.categoryRepository.GetAll().ToList();
             return View(categories);
         }
-        
-        public IActionResult Create(){
-            return View();
-        }
-        
-        [HttpPost]
-        public IActionResult Create(Category category){
-            int result;
-            if(int.TryParse(category.Name,out result)){
-                ModelState.AddModelError("", "Name cannot be a number");
-            }
-            if(ModelState.IsValid){
-                _unitOfWork.categoryRepository.Add(category);
-                _unitOfWork.Save();
-                TempData["Success"] = "Category Succesfully Created"; 
-                return RedirectToAction("Index");
-            }
-            else return View();
-        }
 
-        public IActionResult Edit(int? id){
+        public IActionResult Upsert(int? id){
+            Category? category = new Category();
             if(id == null || id == 0){
-                return NotFound();
+                // Create
+                return View(category);
             }
-            Category? category = _unitOfWork.categoryRepository.Get(x => x.Id == id);
-            if(category == null){
-                return NotFound();
+            else {
+                // Update
+                category = _unitOfWork.categoryRepository.Get(x => x.Id == id);
+                if(category == null){
+                    return NotFound();
+                }
+                return View(category);
             }
-            return View(category);
         }
-        
+
         [HttpPost]
-        public IActionResult Edit(Category category){
+        public IActionResult Upsert(Category category){
             int result;
             if(int.TryParse(category.Name,out result)){
                 ModelState.AddModelError("", "Name cannot be a number");
             }
             if(ModelState.IsValid){
-                _unitOfWork.categoryRepository.Update(category);
+                if(category.Id == null || category.Id == 0){
+                    // Create
+                    _unitOfWork.categoryRepository.Add(category);
+                    TempData["Success"] = "Book Succesfully Created"; 
+                }
+                else {
+                    // Update
+                    _unitOfWork.categoryRepository.Update(category);
+                    TempData["Success"] = "Book Succesfully Updated"; 
+                }
                 _unitOfWork.Save();
-                TempData["Success"] = "Category Succesfully Edited"; 
-
                 return RedirectToAction("Index");
             }
             else return View();
         }
-        
 
         [ActionName("Delete")]
         public IActionResult Delete(int? id){

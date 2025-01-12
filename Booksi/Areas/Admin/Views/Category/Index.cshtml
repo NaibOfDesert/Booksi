@@ -12,18 +12,14 @@
         </div>
         <div class="col-6">
             <h2 class="text-end"> 
-                <a asp-asp-area="Admin" asp-controller="Category" asp-action="Create" class="btn btn-primary">
+                <a asp-asp-area="Admin" asp-controller="Category" asp-action="Upsert" class="btn btn-primary">
                     <i class="bi bi-file-earmark-plus-fill">New Category</i> 
                 </a>
             </h2>
         </div>
-
-
     </div>
-
-
-
 </div>
+
 <table class="table table-bordered table-striped"> 
     <thead>
         <tr> 
@@ -56,7 +52,7 @@
                     <div class="w-100 btn-group" role="group">
 
                     </div>
-                    <a asp-asp-area="Admin" asp-controller="Category" asp-action="Edit" asp-route-id="@m.Id" class="btn btn-primary">
+                    <a asp-asp-area="Admin" asp-controller="Category" asp-action="Upsert" asp-route-id="@m.Id" class="btn btn-primary">
                         <i class="bi bi-pencil-square"></i>
                     </a>
                     <a asp-asp-area="Admin" asp-controller="Category" asp-action="Delete" asp-route-id="@m.Id" class="btn btn-primary">
@@ -66,5 +62,4 @@
             </tr>
         }
     </tbody>
-
 </table>

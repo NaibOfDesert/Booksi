@@ -1,12 +1,14 @@
 @model Category
 
+<div class="row pb-2">
+    <h2 class="text-primary">
+        @(Model.Id!=0?"Update Category" : "Create Category")
+    </h2>
+</div>
+
 <form method="post">
+    <input asp-for="Id" hidden />
     <div class="border p-3 mt-4">
-        <div class="row pb-2">
-            <h2 class="text-primary">
-                Create Catagory
-            </h2>
-        </div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-floating mb-3">
             <input asp-for="Name" type="text" class="form-control"/>
@@ -20,9 +22,17 @@
         </div>
         <div class="row">
             <div class="col-2 col-md-3">
-                <button type="submit" class="btn btn-primary form-control">
-                    Submit
-                </button>
+                @{if(Model.Id != 0){
+                    <button type="submit" class="btn btn-primary form-control">
+                        Update
+                    </button>
+                    }
+                    else {
+                    <button type="submit" class="btn btn-primary form-control">
+                        Create
+                    </button>
+                    }
+                }
             </div>
             <div class="col-2 col-md-3">
                 <a asp-asp-area="Admin" asp-controller="Category" asp-action="Index" class="btn btn-secondary form-control">
