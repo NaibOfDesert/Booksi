@@ -93,11 +93,13 @@ namespace Booksi.Areas.Admin.Controllers{
         [ActionName("Delete")]
         public IActionResult Delete(int? id){
             if(id == null || id ==0){
-                return NotFound();
+                TempData["Error"] = "Error while Book Deleting - not founded."; 
+                return RedirectToAction ("Index"); 
             }
             Book? book= _unitOfWork.bookRepository.Get(x => x.Id == id);
             if(book == null){
-                return NotFound();
+                TempData["Error"] = "Error while Book Deleting - not founded."; 
+                return RedirectToAction ("Index"); 
             }
             if(!string.IsNullOrEmpty(book.ImageUrl)){
                 string wwwRootPath = _webHostEnvironment.WebRootPath; 
