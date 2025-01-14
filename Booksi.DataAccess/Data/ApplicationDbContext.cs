@@ -2,9 +2,10 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Booksi.Models.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace Booksi.DataAccess.Data{
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Book> Books{ get; set; }
