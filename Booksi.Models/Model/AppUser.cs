@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Booksi.Models.Model{
     public class AppUser : IdentityUser{
-        [Required]
+        // [Required]
         public string Name { get; set;}
-        [Required]
+        // [Required]
         public string LastName { get; set;}
 
         public string? Country { get; set;} 
