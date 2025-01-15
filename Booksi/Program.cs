@@ -30,7 +30,7 @@ builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 
 // builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -52,10 +52,12 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-
+app.MapRazorPages();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}");
+    pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
+    );
+
 
 app.Run();
 
