@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Booksi.Models.Model;
+using Booksi.Utility;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
 namespace Booksi.Areas.Identity.Pages.Account
 {
@@ -27,6 +30,7 @@ namespace Booksi.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
@@ -35,12 +39,14 @@ namespace Booksi.Areas.Identity.Pages.Account
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             IUserStore<IdentityUser> userStore,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
             _userStore = userStore;
+            _roleManager = roleManager;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
@@ -99,11 +105,31 @@ namespace Booksi.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Display(Name = "UserRole")]
+            public string? Role {get; set; }
+
+            [ValidateNever]
+            public IEnumerable<SelectListItem> Roles {get; set; }
+
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
+            /// INFO: Automatically create Tables in Db after application run
+            if(!_roleManager.RoleExistsAsync(RolesStatic.RoleUserAppAdmin).GetAwaiter().GetResult()){
+                await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppAdmin));
+                await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppCompany));
+                await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppEmployee));
+                await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppCustomer));
+            }
+            Input = new(){
+                Roles =  _roleManager.Roles.Select(x => x.Name). Select(y => new SelectListItem {
+                    Text = y,
+                    Value = y
+                }),
+            };
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
