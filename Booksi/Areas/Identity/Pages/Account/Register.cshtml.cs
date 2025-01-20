@@ -125,7 +125,7 @@ namespace Booksi.Areas.Identity.Pages.Account
                 await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppCustomer));
             }
             Input = new(){
-                Roles =  _roleManager.Roles.Select(x => x.Name). Select(y => new SelectListItem {
+                Roles =  _roleManager.Roles.Select(x => x.Name).Select(y => new SelectListItem {
                     Text = y,
                     Value = y
                 }),
@@ -141,7 +141,15 @@ namespace Booksi.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+                if(!String.IsNullOrEmpty(Input.Role))
+                {
+                    await _userManager.AddToRoleAsync(user, Input.Role);
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, RolesStatic.RoleUserAppCustomer);
 
+                }
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
