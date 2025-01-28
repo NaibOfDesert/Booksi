@@ -1,14 +1,17 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
 using Booksi.DataAccess.Data;
 using Booksi.DataAccess.Repository.Repository;
 using Booksi.DataAccess.Repository.IRepository;
 using Booski.DataAccess.Repository.IRepository;
 using Booksi.Models.Model;
 using Booksi.Models.ViewModel;
+using Booksi.Utility;
 
 namespace Booksi.Areas.Admin.Controllers{
     [Area("Admin")]
+    [Authorize(Roles = RolesStatic.RoleUserAppAdmin)]
     public class BookController : Controller
     {
         private readonly ILogger<BookController> _logger;
