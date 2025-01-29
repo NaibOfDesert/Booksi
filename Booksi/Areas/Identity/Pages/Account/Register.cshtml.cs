@@ -120,9 +120,9 @@ namespace Booksi.Areas.Identity.Pages.Account
             /// INFO: Automatically create Tables in Db after application run
             if(!_roleManager.RoleExistsAsync(RolesStatic.RoleUserAppAdmin).GetAwaiter().GetResult()){
                 await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppAdmin));
-                await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppCompany));
                 await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppEmployee));
                 await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppCustomer));
+                // await _roleManager.CreateAsync(new IdentityRole(RolesStatic.RoleUserAppCompany));
             }
             Input = new(){
                 Roles =  _roleManager.Roles.Select(x => x.Name).Select(y => new SelectListItem {
