@@ -7,7 +7,7 @@ namespace Booksi.DataAccess.Repository.Repository{
     {
         private readonly ApplicationDbContext _db;
         public CategoryRepository(ApplicationDbContext db) : base(db){
-           this. _db = db;
+           this._db = db;
         }
     }
 }

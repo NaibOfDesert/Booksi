@@ -3,10 +3,10 @@ using Booksi.DataAccess.Data;
 using Booksi.Models.Model;
 
 namespace Booksi.DataAccess.Repository.Repository{
-    public class BookRepository : Repository<Book>, IBookRepository
+    public class AppUserRepository : Repository<AppUser>, IAppUserRepository
     {
         private readonly ApplicationDbContext _db;
-        public BookRepository(ApplicationDbContext db) : base(db){
+        public AppUserRepository(ApplicationDbContext db) : base(db){
            this._db = db;
         }
     }
