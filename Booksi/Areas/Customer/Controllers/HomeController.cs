@@ -48,11 +48,23 @@ namespace Booksi.Areas.Customer.Controllers{
         [Authorize]
         public IActionResult Details(ShoppingCard shoppingCard)
         {
+            // INFO: shopping card defalut for db as 0 to tell db this is a new record.
+            shoppingCard.Id = 0;
             var identity = (ClaimsIdentity)User.Identity;
             var userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
-            shoppingCard.AppUserId = userId; 
+            shoppingCard.AppUserId = userId;
 
-            _unitOfWork.shoppingCardRepository.Add(shoppingCard);
+            ShoppingCard shoppingCardDb = _unitOfWork.shoppingCardRepository.Get(x => x.AppUserId == userId && x.BookId ==shoppingCard.BookId);
+
+            if (shoppingCardDb != null)
+            {
+                shoppingCardDb.BooksCount += shoppingCard.BooksCount;
+                _unitOfWork.shoppingCardRepository.Update(shoppingCardDb);
+            }
+            else
+            {
+                _unitOfWork.shoppingCardRepository.Add(shoppingCard);
+            }
             _unitOfWork.Save(); 
 
             return RedirectToAction("Index");
