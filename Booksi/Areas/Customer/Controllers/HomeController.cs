@@ -37,8 +37,8 @@ namespace Booksi.Areas.Customer.Controllers{
             }
             ShoppingCard shoppingCard = new ()
             {
-                BookId = book.Id,
                 Book = book,
+                BookId = book.Id,
                 BooksCount = 1
             };
             return View(shoppingCard);

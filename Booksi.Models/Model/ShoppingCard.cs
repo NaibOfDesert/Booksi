@@ -22,10 +22,6 @@ namespace Booksi.Models.Model
         [Range(1, 10)]
         public int BooksCount { get; set; }
 
-        public ShoppingCard()
-		{
-	
-		}
 	}
 }
 
