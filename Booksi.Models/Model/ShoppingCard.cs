@@ -7,16 +7,17 @@ namespace Booksi.Models.Model
 {
 	public class ShoppingCard
 	{
+        [Key]
         public int Id { get; set; }
 
         public int BookId { get; set; }
         [ForeignKey("BookId")]
         [ValidateNever]
         public Book Book { get; set; }
-        public string ApplicationUserId { get; set; }
-        [ForeignKey("ApplicationUserId")]
+        public string AppUserId { get; set; }
+        [ForeignKey("AppUserId")]
         [ValidateNever]
-        public AppUser User { get; set; }
+        public AppUser AppUser { get; set; }
 
         [Range(1, 10)]
         public int BooksCount { get; set; }

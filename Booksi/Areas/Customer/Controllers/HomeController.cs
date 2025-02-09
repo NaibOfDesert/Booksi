@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Booksi.DataAccess.Repository.IRepository;
 using Booksi.DataAccess.Repository.Repository; 
 using Booksi.Models.Model;
-using Booksi.Models.ViewModel; 
+using Booksi.Models.ViewModel;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Booksi.Areas.Customer.Controllers{
     [Area("Customer")]
@@ -33,7 +35,27 @@ namespace Booksi.Areas.Customer.Controllers{
             if(book == null){
                 return NotFound();
             }
-            return View(book);
+            ShoppingCard shoppingCard = new ()
+            {
+                BookId = book.Id,
+                Book = book,
+                BooksCount = 1
+            };
+            return View(shoppingCard);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Details(ShoppingCard shoppingCard)
+        {
+            var identity = (ClaimsIdentity)User.Identity;
+            var userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            shoppingCard.AppUserId = userId; 
+
+            _unitOfWork.shoppingCardRepository.Add(shoppingCard);
+            _unitOfWork.Save(); 
+
+            return RedirectToAction("Index");
         }
 
         public IActionResult Privacy()
