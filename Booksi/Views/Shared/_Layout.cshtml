@@ -37,6 +37,8 @@
 
                                 </ul>
                             </li>
+                        }
+                        @if (User.IsInRole(RolesStatic.RoleUserAppCustomer)){
                             <li>
                                 <a class="dropdown-item" asp-area="Customer" asp-controller="Shopping" asp-action="Index">ShoppingCard</a>
                             </li>
