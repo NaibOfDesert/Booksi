@@ -41,5 +41,42 @@ namespace Booksi.Areas.Customer.Controllers
             }
             
         }
+
+        public IActionResult Incremet(int Id)
+        {
+            ShoppingCard shoppingCard = _unitOfWork.shoppingCardRepository.Get(x => x.Id == Id);
+            shoppingCard.BooksCount += 1;
+            _unitOfWork.shoppingCardRepository.Update(shoppingCard);
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));            
+        }
+
+        public IActionResult Decrement(int Id)
+        {
+            ShoppingCard shoppingCard = _unitOfWork.shoppingCardRepository.Get(x => x.Id == Id);
+            shoppingCard.BooksCount -= 1;
+            _unitOfWork.shoppingCardRepository.Update(shoppingCard);
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));    
+        }
+
+        public IActionResult Delete(int Id)
+        {
+            ShoppingCard shoppingCard = _unitOfWork.shoppingCardRepository.Get(x => x.Id == Id);
+            _unitOfWork.shoppingCardRepository.Delete(shoppingCard);
+            _unitOfWork.Save();
+
+            return RedirectToAction(nameof(Index));    
+        }
+
+        public IActionResult Summary(){
+            var identity = (ClaimsIdentity)User.Identity;
+            var userId = identity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+
+            return View();
+        }
     }
 }
