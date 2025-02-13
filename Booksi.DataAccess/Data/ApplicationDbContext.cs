@@ -12,6 +12,9 @@ namespace Booksi.DataAccess.Data{
         public DbSet<Category> Categories{ get; set; }
         public DbSet<Book> Books{ get; set; }
         public DbSet<ShoppingCard> ShoppingCards { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderSummary> OrderSummaries { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options){
 
