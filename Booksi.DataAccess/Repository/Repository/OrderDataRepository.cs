@@ -3,10 +3,10 @@ using Booksi.DataAccess.Data;
 using Booksi.Models.Model;
 
 namespace Booksi.DataAccess.Repository.Repository{
-    public class OrderSummaryRepository : Repository<OrderSummary>, IOrderSummaryRepository
+    public class OrderDataRepository : Repository<OrderData>, IOrderDataRepository
     {
         private readonly ApplicationDbContext _db;
-        public OrderSummaryRepository(ApplicationDbContext db) : base(db){
+        public OrderDataRepository(ApplicationDbContext db) : base(db){
            this._db = db;
         }
     }

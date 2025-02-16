@@ -10,8 +10,8 @@ namespace Booksi.DataAccess.Repository.Repository{
         public ICategoryRepository categoryRepository {get; private set;} 
         public IBookRepository bookRepository {get; private set;}
         public IShoppingCardRepository shoppingCardRepository { get; private set; }
+        public IOrderDataRepository orderDataRepository { get; private set; }
         public IOrderRepository orderRepository { get; private set; }
-        public IOrderSummaryRepository orderSummaryRepository { get; private set; }
 
 
         public UnitOfWork(ApplicationDbContext db){
@@ -20,8 +20,8 @@ namespace Booksi.DataAccess.Repository.Repository{
             categoryRepository = new CategoryRepository(db);
             bookRepository = new BookRepository(db);
             shoppingCardRepository = new ShoppingCardRepository(db);
-            orderRepository = new OrderRepository(db);
-            orderSummaryRepository = new OrderSummaryRepository(db);    
+            orderDataRepository = new OrderDataRepository(db);
+            orderRepository = new OrderRepository(db);    
 
         }
 

@@ -8,8 +8,8 @@ namespace Booski.DataAccess.Repository.IRepository{
         ICategoryRepository categoryRepository {get;}
         IBookRepository bookRepository {get;}
         IShoppingCardRepository shoppingCardRepository { get; }
+        public IOrderDataRepository orderDataRepository { get; }
         public IOrderRepository orderRepository { get; }
-        public IOrderSummaryRepository orderSummaryRepository { get; }
 
         void Save(); 
     }
