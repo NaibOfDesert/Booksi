@@ -8,9 +8,8 @@ using Booksi.Utility;
 
 namespace Booksi.Models.Model{
     public class OrderData{
-        [Key]
         public int Id { get; set; }
-        public int AppUserId { get; set; }
+        public string AppUserId { get; set; }
         [ForeignKey("AppUserId")]
         [ValidateNever]
         public AppUser AppUser { get; set; }

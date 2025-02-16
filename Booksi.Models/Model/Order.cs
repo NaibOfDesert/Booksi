@@ -10,14 +10,9 @@ namespace Booksi.Models.Model
 {
     public class Order
     {
-        [Key]
         public int Id { get; set; }
-        public int AppUserId { get; set; }
-        [ForeignKey("AppUserId")]
-        [ValidateNever]
-        public AppUser AppUser { get; set; }
-        public int OrderId { get; set; }
-        [ForeignKey("OrderId")]
+        public int OrderDataId { get; set; }
+        [ForeignKey("OrderDataId")]
         [ValidateNever]
         public OrderData OrderData { get; set; }
         public int BookId {  get; set; }
