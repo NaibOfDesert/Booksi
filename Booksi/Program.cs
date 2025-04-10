@@ -10,6 +10,8 @@ using Booski.DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Booksi.Utility;
+using Microsoft.Playwright;
+
 
 /* Program basic run informations:
  * To use Docekr Compose use connection string with "DefaultConnection".
