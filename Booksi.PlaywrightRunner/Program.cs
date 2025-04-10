@@ -1,13 +1,9 @@
 ﻿using Microsoft.Playwright;
 
 // See https://aka.ms/new-console-template for more information
-
-
-namespace HelloWorld;
-
 class Program
 {
-    public static async void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         Console.WriteLine("Booksi.PlaywrightRunner Starter");
 
@@ -20,8 +16,6 @@ class Program
         {
             Path = "screenshot.png"
         });
-
-
 
     }
 }

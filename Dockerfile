@@ -16,6 +16,7 @@ COPY ["Booksi/Booksi.csproj", "Booksi/"]
 COPY ["Booksi.DataAccess/Booksi.DataAccess.csproj", "Booksi.DataAccess/"]
 COPY ["Booksi.Models/Booksi.Models.csproj", "Booksi.Models/"]
 COPY ["Booksi.Utility/Booksi.Utility.csproj", "Booksi.Utility/"]
+COPY ["Booksi.Booksi.PlaywrightRunner/Booksi.Booksi.PlaywrightRunner.csproj", "Booksi.Booksi.PlaywrightRunner/"]
 RUN dotnet restore "Booksi/Booksi.csproj"
 COPY . .
 WORKDIR "/src/."
