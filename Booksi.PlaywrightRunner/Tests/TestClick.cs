@@ -1,9 +1,13 @@
 using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using Microsoft.Playwright;
-public static class Tests{
+public class TestClick : Test{
+    public string Description {get; set;} = "";
     public static async Task ClickButton(){
-        /*
+        Info.InfoTest("Test ClickButtonStarted");
+
+
         using var playwright = await Playwright.CreateAsync();
         await using var browser = await playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
         {
@@ -21,30 +25,16 @@ public static class Tests{
 
         // Check result text
         var resultText = await page.InnerTextAsync("#result");
-
+    
         if (resultText.Contains("You clicked the button"))
         {
-            Console.WriteLine("✅ Click test passed!");
+            Info.InfoTestPass("Test ClickButtonStarted passed");
         }
         else
         {
-            Console.WriteLine("❌ Click test failed.");
+            Info.InfoTestFail("Test ClickButtonStarted vailed");
         }
 
-
-
-    public static async Task Login(IPlaywright playwright, IBrowser browser, IPage page, string username, string password){}
-        
-        await page.GotoAsync("https://playwright.dev/dotnet");
-        await page.ScreenshotAsync(new() { Path = "screenshot.png" });
         
     }
-
-        */
-        
-    }
-
-
-
-
 }

@@ -30,7 +30,6 @@
     <ProjectReference Include="..\Booksi.DataAccess\Booksi.DataAccess.csproj" />
     <ProjectReference Include="..\Booksi.Models\Booksi.Models.csproj" />
     <ProjectReference Include="..\Booksi.Utility\Booksi.Utility.csproj" />
-    <ProjectReference Include="..\Booksi.PlaywrightRunner\Booksi.PlaywrightRunner.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

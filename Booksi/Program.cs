@@ -55,10 +55,6 @@ builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
-// Run PlaywrightRunner for Testing.
-System.Diagnostics.Process.Start("dotnet", "run --project ../Booksi.PlaywrightRunner/Booksi.PlaywrightRunner.csproj");
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
