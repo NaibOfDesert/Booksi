@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Utility", "Booksi.Ut
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.PlaywrightRunner", "Booksi.PlaywrightRunner\Booksi.PlaywrightRunner.csproj", "{4036CA49-6842-4B2C-821B-62CE90AAB3B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Runner", "Booksi.Runner\Booksi.Runner.csproj", "{E79D66F6-79F3-4ADB-817E-FB1F0BE36D4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4036CA49-6842-4B2C-821B-62CE90AAB3B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4036CA49-6842-4B2C-821B-62CE90AAB3B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4036CA49-6842-4B2C-821B-62CE90AAB3B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E79D66F6-79F3-4ADB-817E-FB1F0BE36D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E79D66F6-79F3-4ADB-817E-FB1F0BE36D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E79D66F6-79F3-4ADB-817E-FB1F0BE36D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E79D66F6-79F3-4ADB-817E-FB1F0BE36D4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

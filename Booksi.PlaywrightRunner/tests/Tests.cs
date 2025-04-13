@@ -1,3 +1,6 @@
+using System;
+using System.Threading.Tasks;
+using Microsoft.Playwright;
 public static class Tests{
     public static async Task ClickButton(){
         /*
@@ -27,8 +30,21 @@ public static class Tests{
         {
             Console.WriteLine("❌ Click test failed.");
         }
-        */
+
+
+
+    public static async Task Login(IPlaywright playwright, IBrowser browser, IPage page, string username, string password){}
+        
+        await page.GotoAsync("https://playwright.dev/dotnet");
+        await page.ScreenshotAsync(new() { Path = "screenshot.png" });
+        
     }
+
+        */
+        
+    }
+
+
 
 
 }
