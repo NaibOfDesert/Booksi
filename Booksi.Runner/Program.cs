@@ -1,36 +1,42 @@
 ﻿using System;
-
+using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 public class Program{
+    private static string path => Path.GetFullPath("Booksi.Runner").Replace("/Booksi.Runner", "");
     private static string[] menuOptionList = {"Build", "Up", "Run", "Exit"};
-    private static string[] menuUpOptionList = {"Build", "Up", "Run", "Back"};
-    private static int seclectedOptionIndex = 0;
-    private static ConsoleKey consoleKey; 
+    private static string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
 
     static void Main(string[] args){
-        string option = "";
+        string option1 = String.Empty;
         do{
-            option = Menu(menuOptionList);
-            Switch(option);
-
+            option1 = Menu(menuOptionList);
+            Switch(option1);
         }
-        while (option != "Exit"); 
-
-
+        while (option1 != "Exit"); 
     }
 
     private static string Menu(string[] menuList){
-        seclectedOptionIndex = 0;
+        if(Console.IsInputRedirected)
+            return MenuKey(menuList);
+        else 
+            return MenuInput(menuList);
+    }
+#region MENU
+    private static string MenuKey(string[] menuList){
+        ConsoleKey consoleKey; 
+        int seclectedOptionIndex = 0;
+
         do{
             Console.Clear();
             Console.WriteLine("Use Up and Down arrows to navigate. Press Enter to select:\n");
-
+            Console.WriteLine("Options:\n");
             for(int i = 0; i < menuList.Length; i++){
                 if(i == seclectedOptionIndex){
                     Console.ForegroundColor = ConsoleColor.Black;
                     Console.BackgroundColor = ConsoleColor.Green;
                 }
-                Console.WriteLine(menuList[i]);
+                Console.WriteLine("" + menuList[i]);
                 Console.ResetColor();
             }
 
@@ -51,43 +57,109 @@ public class Program{
         Console.Clear();
         return menuOptionList[seclectedOptionIndex];
     }
-    private static void Switch(string input1, string input2 = "") {
-        switch (input1) {
+
+    private static string MenuInput(string[] menuList){
+        string consoleInput = String.Empty;
+        do{
+            Console.Clear();
+            Console.WriteLine("Write choosen option. Press Enter to go next:\n");
+            Console.WriteLine("Options:\n");
+            for(int i = 0; i < menuList.Length; i++){
+                Console.WriteLine("" + menuList[i]);
+            }
+            consoleInput = Console.ReadLine();
+        }
+        while(!menuList.Contains(consoleInput));
+        Console.Clear();
+        return consoleInput;
+    }
+
+    private static void Switch(string optionMain) {
+        switch (optionMain) {
             case "Build":
-                Console.WriteLine("Build\n");
-                System.Diagnostics.Process.Start("dotnet", "build --project ../Booksi.csproj");
+                Console.WriteLine("Starting build...");
+                BashRun("/bin/bash", "BashBuild.sh", "");
+                Console.ReadKey();
                 break;
             case "Up":
                 Console.WriteLine("Up\n");
-                Menu(menuUpOptionList);
-                switch (input2){
-                    case "1":
-                    break;
+                string optionUp = Menu(menuUpOptionList);
+                switch (optionUp){
+                    case "DockerCompose":
+                        Console.WriteLine("Starting building docker image...");
 
+                        break;
 
+                    case "DbAdd":
+                        Console.WriteLine("Starting adding database...");
+
+                        break;
+
+                    case "DbUpdate":
+                        Console.WriteLine("Starting updating database...");
+
+                        break;
+                    case "Back":
+                        Menu(menuOptionList);
+                        break;
                     default:
-                    break;
-                }
-                
-                // System.Diagnostics.Process.Start("dotnet", "run --project ../Booksi.PlaywrightRunner/Booksi.PlaywrightRunner.csproj");
+                        break;
+                }         
                 break;
             case "Run":
                 Console.WriteLine("Run");
                 break;
-            case "Back":
-                Console.WriteLine("Back");
-                Menu(menuOptionList);
-                break;
             case "Exit":
+                System.Environment.Exit(0);
                 break;
             default:
                 break;
         }
-
-
     }
+#endregion
 
-    void Clear() {
-        System.Diagnostics.Process.Start("clear");
+#region RUNCODE
+    public static void BuildProject(){
+        var projectPath = $"{path}/Booksi/Booksi.csproj";
+
+        var process = new Process();
+        process.StartInfo.FileName = "dotnet";
+        process.StartInfo.Arguments = $"build {projectPath}";
+        process.StartInfo.WorkingDirectory = AppDomain.CurrentDomain.BaseDirectory;
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+
+        process.OutputDataReceived += (sender, e) => Console.WriteLine(e.Data);
+        process.ErrorDataReceived += (sender, e) => Console.WriteLine("ERROR: " + e.Data);
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        process.WaitForExit();  
+        
+        Console.WriteLine($"Build process exited with code {process.ExitCode}");
     }
+    public static void BashRun(string fileName, string arguments, string projectPath){
+        var process = new Process();
+        process.StartInfo.FileName = $"{fileName}";
+        process.StartInfo.Arguments = $"{arguments}";
+        process.StartInfo.WorkingDirectory = $"{path}{projectPath}";
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+        process.StartInfo.UseShellExecute = false;
+        process.StartInfo.CreateNoWindow = false;
+
+        process.OutputDataReceived += (sender, e) => Console.WriteLine(e.Data);
+        process.ErrorDataReceived += (sender, e) => Console.WriteLine("ERROR: " + e.Data);
+
+        process.Start();
+        process.BeginOutputReadLine();
+        process.BeginErrorReadLine();
+        process.WaitForExit();  
+        
+        Console.WriteLine($"Build process exited with code {process.ExitCode}");
+    }
+#endregion
+
 }
