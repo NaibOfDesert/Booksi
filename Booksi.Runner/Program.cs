@@ -9,36 +9,33 @@ public class Program{
     private static string[] menuOptionList = {"Build", "Up", "Run", "Exit"};
     private static string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
     static void Main(string[] args){
-        
+        string menuOption;
+
         if (args.Length > 0)
             environment = args[0].ToLower();
 
-        Menu(menuOptionList);
-
+        do{
+            menuOption = Menu(menuOptionList);
+            Switch(menuOption);
+        }
+        while (menuOption != "Exit"); 
     }
 
 #region MENU
-    private static void Menu(string[] menuList){
-        string menuOption = String.Empty;
+    private static string Menu(string[] menuList){
+        string menuOption;
 
         switch (environment){
             case "MAC":
-                do{
-                    menuOption = MenuInput(menuOptionList);
-                    Switch(menuOption);
-                }
-                while (menuOption != "Exit"); 
+                menuOption = MenuInput(menuList);
                 break;
             case "WIN":
             case null:
             default:
-                do{
-                    menuOption = MenuKey(menuOptionList);
-                    Switch(menuOption);
-                }
-                while (menuOption != "Exit"); 
+                menuOption = MenuKey(menuList);
                 break;
         }
+        return menuOption;
     }
 
     private static string MenuKey(string[] menuList){
@@ -101,8 +98,7 @@ public class Program{
                 break;
             case "Up":
                 Console.WriteLine("Up\n");
-                string optionUp = Menu(menuUpOptionList);
-                switch (optionUp){
+                switch (Menu(menuUpOptionList)){
                     case "DockerCompose":
                         Console.WriteLine("Starting building docker image...");
 
@@ -137,6 +133,8 @@ public class Program{
 #endregion
 
 #region RUNCODE
+
+    //TODO: delete
     public static void BuildProject(){
         var projectPath = $"{path}/Booksi/Booksi.csproj";
 
