@@ -4,25 +4,43 @@ using System.Runtime.InteropServices;
 
 public class Program{
     private static string path => Path.GetFullPath("Booksi.Runner").Replace("/Booksi.Runner", "");
+    private static string environment = string.Empty;
+
     private static string[] menuOptionList = {"Build", "Up", "Run", "Exit"};
     private static string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
-
     static void Main(string[] args){
-        string option1 = String.Empty;
-        do{
-            option1 = Menu(menuOptionList);
-            Switch(option1);
-        }
-        while (option1 != "Exit"); 
+        
+        if (args.Length > 0)
+            environment = args[0].ToLower();
+
+        Menu(menuOptionList);
+
     }
 
-    private static string Menu(string[] menuList){
-        if(Console.IsInputRedirected)
-            return MenuKey(menuList);
-        else 
-            return MenuInput(menuList);
-    }
 #region MENU
+    private static void Menu(string[] menuList){
+        string menuOption = String.Empty;
+
+        switch (environment){
+            case "MAC":
+                do{
+                    menuOption = MenuInput(menuOptionList);
+                    Switch(menuOption);
+                }
+                while (menuOption != "Exit"); 
+                break;
+            case "WIN":
+            case null:
+            default:
+                do{
+                    menuOption = MenuKey(menuOptionList);
+                    Switch(menuOption);
+                }
+                while (menuOption != "Exit"); 
+                break;
+        }
+    }
+
     private static string MenuKey(string[] menuList){
         ConsoleKey consoleKey; 
         int seclectedOptionIndex = 0;
