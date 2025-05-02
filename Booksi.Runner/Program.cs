@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 public class Program{
     private static string path => Path.GetFullPath("Booksi.Runner").Replace("/Booksi.Runner", "");
     private static string environment = string.Empty;
@@ -44,7 +43,7 @@ public class Program{
 
         do{
             Console.Clear();
-            Console.WriteLine("Use Up and Down arrows to navigate. Press Enter to select:\n");
+            Log.LogWrite("Use Up and Down arrows to navigate. Press Enter to select:\n", LogType.Info);
             Console.WriteLine("Options:\n");
             for(int i = 0; i < menuList.Length; i++){
                 if(i == seclectedOptionIndex){
