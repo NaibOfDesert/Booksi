@@ -46,12 +46,10 @@ public class Program{
             Log.LogWrite("Use Up and Down arrows to navigate. Press Enter to select:\n", LogType.Info);
             Console.WriteLine("Options:\n");
             for(int i = 0; i < menuList.Length; i++){
-                if(i == seclectedOptionIndex){
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.BackgroundColor = ConsoleColor.Green;
-                }
-                Console.WriteLine("" + menuList[i]);
-                Console.ResetColor();
+                if(i == seclectedOptionIndex)
+                    Log.LogWrite("  " + menuList[i], LogType.Selected);
+                else
+                    Log.LogWrite("  " + menuList[i], LogType.Log);
             }
 
             consoleKey = Console.ReadKey(true).Key;
@@ -76,7 +74,7 @@ public class Program{
         string consoleInput = String.Empty;
         do{
             Console.Clear();
-            Console.WriteLine("Write choosen option. Press Enter to go next:\n");
+            Log.LogWrite("Write choosen option. Press Enter to go next:\n", LogType.Info);
             Console.WriteLine("Options:\n");
             for(int i = 0; i < menuList.Length; i++){
                 Console.WriteLine("" + menuList[i]);
