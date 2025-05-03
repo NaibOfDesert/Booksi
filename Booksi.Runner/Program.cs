@@ -2,9 +2,8 @@
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 public class Program{
-    private static string path => Path.GetFullPath("Booksi.Runner").Replace("/Booksi.Runner", "");
+    private static string path => Path.GetFullPath("Booksi.Runner").Replace("/bin/Debug/net7.0/Booksi.Runner", "");
     private static string environment = string.Empty;
-
     private static string[] menuOptionList = {"Build", "Up", "Run", "Exit"};
     private static string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
     static void Main(string[] args){
@@ -25,12 +24,12 @@ public class Program{
         string menuOption;
 
         switch (environment){
+            case null:
+            default:
             case "MAC":
                 menuOption = MenuInput(menuList);
                 break;
             case "WIN":
-            case null:
-            default:
                 menuOption = MenuKey(menuList);
                 break;
         }
@@ -44,7 +43,7 @@ public class Program{
         do{
             Console.Clear();
             Log.LogWrite("Use Up and Down arrows to navigate. Press Enter to select:\n", LogType.Info);
-            Console.WriteLine("Options:\n");
+            Console.WriteLine("Options:");
             for(int i = 0; i < menuList.Length; i++){
                 if(i == seclectedOptionIndex)
                     Log.LogWrite("  " + menuList[i], LogType.Selected);
@@ -90,7 +89,7 @@ public class Program{
         switch (optionMain) {
             case "Build":
                 Console.WriteLine("Starting build...");
-                BashRun("/bin/bash", "BashBuild.sh", "");
+                BashRun("/BashScript", "BashBuild.sh", $"{path}/Booksi/Booksi.csproj");
                 Console.ReadKey();
                 break;
             case "Up":
