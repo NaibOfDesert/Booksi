@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Booksi.Tools.Pathing
+namespace Booksi.Tools
 {
     public static class PathHelper
     {

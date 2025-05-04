@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Booksi.Tools;
 public class Program{
-    private static string projectPath => Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "../../../"));
+    private static string projectPath = PathHelper.ProjectRoot;
     private static readonly string[] menuOptionList = {"Build", "Up", "Run", "Exit"};
     private static readonly string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
     private static EnvironmentType environmentType;
@@ -95,7 +96,7 @@ public class Program{
         switch (optionMain) {
             case "Build":
                 Log.Write("Starting build...", LogType.Log);
-                BashRun("/bin/bash", $"{projectPath}/BashScript/BashBuild.sh", $"{projectPath}/BashScript");
+                BashRun("/bin/bash", $"{projectPath}/BashScript/BooksiRun.sh", $"{projectPath}/BashScript");
                 break;
             case "Up":
                 Console.WriteLine("Up\n");
