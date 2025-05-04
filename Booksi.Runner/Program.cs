@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using Booksi.Tools;
 public class Program{
     private static string projectPath = PathHelper.ProjectRoot;
-    private static readonly string[] menuOptionList = {"Build", "Up", "Run", "Exit"};
+    private static readonly string[] menuOptionList = {"Build", "Up", "Run", "AddScripts", "Exit"};
     private static readonly string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
     private static EnvironmentType environmentType;
     private delegate string MenuDelegate(string[] menuList);
@@ -95,8 +95,8 @@ public class Program{
     private static void Switch(string optionMain) {
         switch (optionMain) {
             case "Build":
-                Log.Write("Starting build...", LogType.Log);
-                BashRun("/bin/bash", $"{projectPath}/BashScript/BooksiRun.sh", $"{projectPath}/BashScript");
+                Log.Write("Starting building...", LogType.Log);
+                BashRun("/bin/bash", PathHelper.GetScriptPath("BooksiBuild.sh"), PathHelper.BashScriptPath);
                 break;
             case "Up":
                 Console.WriteLine("Up\n");
@@ -124,7 +124,12 @@ public class Program{
                 }         
                 break;
             case "Run":
-                Log.Write("Run", LogType.Log);
+                Log.Write("Starting running...", LogType.Log);
+                BashRun("/bin/bash", PathHelper.GetScriptPath("BooksiBuild.sh"), PathHelper.BashScriptPath);
+                break;
+            case "AddScripts":
+                Log.Write("Starting running...", LogType.Log);
+                BashRun("/bin/bash", PathHelper.GetScriptPath("AddScripts.sh"), PathHelper.BashScriptPath);
                 break;
             case "Exit":
                 System.Environment.Exit(0);

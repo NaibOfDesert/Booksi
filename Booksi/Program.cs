@@ -78,6 +78,11 @@ app.MapControllerRoute(
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
     );
 
+app.Lifetime.ApplicationStarted.Register(() =>
+{
+    Console.WriteLine("App started. Press Ctrl+C to shut down.");
+});
+
 app.Run();
 
 

@@ -1,3 +1,5 @@
+using System;
+
 public static class Log {
 
     private static readonly ConsoleColor logForegroundColor  = ConsoleColor.Black;
