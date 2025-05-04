@@ -96,13 +96,14 @@ public class Program{
         switch (optionMain) {
             case "Build":
                 Log.Write("Starting building...", LogType.Log);
-                BashRun("/bin/bash", PathHelper.GetScriptPath("BooksiBuild.sh"), PathHelper.BashScriptPath);
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, PathHelper.GetScriptPath("BooksiBuild.sh"));
                 break;
             case "Up":
                 Console.WriteLine("Up\n");
                 switch (Menu(menuUpOptionList)){
                     case "DockerCompose":
                         Log.Write("Starting building docker image...", LogType.Log);
+                        BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath("DockerCompose.sh"));
 
                         break;
 
@@ -116,20 +117,18 @@ public class Program{
 
                         break;
                     case "Back":
-                        Menu(menuOptionList);
-                        break;
                     default:
-                        Menu(menuUpOptionList);
+                        Menu(menuOptionList);
                         break;
                 }         
                 break;
             case "Run":
                 Log.Write("Starting running...", LogType.Log);
-                BashRun("/bin/bash", PathHelper.GetScriptPath("BooksiBuild.sh"), PathHelper.BashScriptPath);
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath("BooksiRun.sh"));
                 break;
             case "AddScripts":
-                Log.Write("Starting running...", LogType.Log);
-                BashRun("/bin/bash", PathHelper.GetScriptPath("AddScripts.sh"), PathHelper.BashScriptPath);
+                Log.Write("Starting running and adding scripts...", LogType.Log);
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, PathHelper.GetScriptPath("AddScripts.sh"));
                 break;
             case "Exit":
                 System.Environment.Exit(0);
@@ -142,10 +141,35 @@ public class Program{
 #endregion
 
 #region RUNCODE
-    public static void BashRun(string fileName, string arguments, string path){
+    public static void BashSelectEnvironmentAndTerminalAndRun(TerminalType terminalType, string path, string arguments = ""){
+        switch (environmentType){
+            default:
+            case EnvironmentType.Mac:
+                switch (terminalType){
+                    case TerminalType.Internal:
+                        BashRunInInternalTerminal(PathHelper.GetScriptPath("AddScripts.sh"), PathHelper.BashScriptPath);
+                        break;
+                    case TerminalType.External:
+                        BashRunInExternalTerminalMac(PathHelper.GetScriptPath("BooksiRun.sh"));
+                        break;
+                }
+                break;
+            case EnvironmentType.Win:
+                switch (terminalType){
+                    case TerminalType.Internal:
+                        BashRunInInternalTerminal(PathHelper.GetScriptPath("AddScripts.sh"), PathHelper.BashScriptPath);
+                        break;
+                    case TerminalType.External:
+                        BashRunInExternalTerminalWin(PathHelper.GetScriptPath("BooksiRun.sh"));
+                        break;
+                }
+                break;
+        }
+    }
+    public static void BashRunInInternalTerminal(string path, string arguments){
         var process = new Process();
 
-        process.StartInfo.FileName = $"{fileName}";
+        process.StartInfo.FileName = "/bin/bash";
         process.StartInfo.Arguments = $"{arguments}";
         process.StartInfo.WorkingDirectory = $"{path}";
         process.StartInfo.RedirectStandardOutput = true;
@@ -163,6 +187,14 @@ public class Program{
         
         Log.Write($"Build process exited with code {process.ExitCode}", LogType.Error);
     }
+    public static void BashRunInExternalTerminalMac(string path){
+        Process.Start("open", $"-a Terminal \"{path}\"");
+    }
+
+    public static void BashRunInExternalTerminalWin(string path){
+        Process.Start("open", $"-a Terminal \"{path}\"");
+    }
+
 #endregion
 
 }

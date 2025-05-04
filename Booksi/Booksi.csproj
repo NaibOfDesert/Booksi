@@ -34,10 +34,6 @@
   </ItemGroup>
 
   <PropertyGroup>
-    <BaseOutputPath>..\Booksi.DataAccess\bin\</BaseOutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <PlaywrightPlatform>all</PlaywrightPlatform>
   </PropertyGroup>
 
