@@ -10,7 +10,8 @@ DOCKER_DIR="$SCRIPT_DIR/../../Booksi"
 cd "$DOCKER_DIR" || { echo "Directory not found: $DOCKER_DIR"; exit 1; }
 
 # Run docker compose
-docker compose up --build
+docker compose up --build --connection="prod" > docker.log 2>&1 &
+tail -f docker.log
 
 echo "Press any key to end..."
 read -n 1 -s

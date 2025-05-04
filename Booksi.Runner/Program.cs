@@ -193,6 +193,14 @@ public class Program{
 
     public static void BashRunInExternalTerminalWin(string path){
         Process.Start("open", $"-a Terminal \"{path}\"");
+
+//         UseShellExecute = false
+
+// RedirectStandardOutput = true
+
+// RedirectStandardError = true
+
+// You call BeginOutputReadLine() and BeginErrorReadLine()
     }
 
 #endregion
