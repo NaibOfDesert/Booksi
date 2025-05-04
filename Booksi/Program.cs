@@ -24,18 +24,24 @@ using Microsoft.Playwright;
  *  After an unsuccessful attempt to close the database server, you may get an error, which will start counting the id for new items by 1000.
 **/
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
+string connectionString = string.Empty; 
+var connectionKey = args.FirstOrDefault(a => a.StartsWith("--connection="))?.Split('=')[1] ?? "DefaultConnection";
 
-// TODO: add switch to run by arguments...
+switch (connectionKey){
+    default:
+    case null:
+    case "dev":
+        // connectionString for: dotnet build / dotnet run -? in  -> IN BOOKSI.BOOKSI folder
+        connectionString = builder.Configuration.GetConnectionString("LocalhostConnection") ?? throw new InvalidOperationException("Connection String 'LocalhostConnection' not found.");
+        break;  
+    case "prod":
+        // connectionString for: docker compose up --build
+        connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection String 'DefaultConnection' not found.");
+        break;
 
-
-// connectionString for: docker compose up --build  -> IN BOOKSI folder
-// var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection String 'DefaultConnection' not found.");
-// connectionString for: dotnet build / dotnet run -? in  -> IN BOOKSI.BOOKSI folder
-var connectionString = builder.Configuration.GetConnectionString("LocalhostConnection") ?? throw new InvalidOperationException("Connection String 'LocalhostConnection' not found.");
+}
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
@@ -77,6 +83,7 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{area=Customer}/{controller=Home}/{action=Index}/{id?}"
     );
+
 
 app.Run();
 

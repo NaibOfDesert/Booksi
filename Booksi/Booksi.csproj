@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <OutputType>Exe</OutputType> <!-- Important -->
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -31,10 +32,6 @@
     <ProjectReference Include="..\Booksi.Models\Booksi.Models.csproj" />
     <ProjectReference Include="..\Booksi.Utility\Booksi.Utility.csproj" />
   </ItemGroup>
-
-  <PropertyGroup>
-    <BaseOutputPath>..\Booksi.DataAccess\bin\</BaseOutputPath>
-  </PropertyGroup>
 
   <PropertyGroup>
     <PlaywrightPlatform>all</PlaywrightPlatform>
