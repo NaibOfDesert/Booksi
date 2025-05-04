@@ -1,7 +1,7 @@
 public enum LogType{
     Log,
     Info,
-    Succes,
+    Success,
     Error,
     Warning,
     Selected,
