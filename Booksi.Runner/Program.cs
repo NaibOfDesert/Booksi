@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Booksi.Runner;
 using Booksi.Tools;
 public class Program{
     private static string projectPath = PathHelper.ProjectRoot;
     private static readonly string[] menuOptionList = {"Build", "Up", "Run", "AddScripts", "Kill", "Exit"};
-    private static readonly string[] menuUpOptionList = {"DockerCompose", "DbAdd", "DbUpdate", "Back"};
+    private static readonly string[] menuUpOptionList = {"BooksiCompose", "DbUpdate", "Back"};
     private static EnvironmentType environmentType;
     private delegate string MenuDelegate(string[] menuList);
     private static MenuDelegate Menu; 
@@ -96,25 +97,18 @@ public class Program{
         switch (optionMain) {
             case "Build":
                 Log.Write("Starting building...", LogType.Log);
-                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, PathHelper.GetScriptPath("BooksiBuild.sh"));
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.BashScriptPath, Scripts.BooksiBuild);
                 break;
             case "Up":
                 Console.WriteLine("Up\n");
                 switch (Menu(menuUpOptionList)){
-                    case "DockerCompose":
-                        Log.Write("Starting building docker image...", LogType.Log);
-                        BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath("DockerCompose.sh"));
-
+                    case "BooksiCompose":
+                        Log.Write("Start composing Booksi docker image...", LogType.Log);
+                        BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, Scripts.BooksiCompose);
                         break;
-
-                    case "DbAdd":
-                        Log.Write("Starting adding database...", LogType.Log);
-
-                        break;
-
                     case "DbUpdate":
-                        Log.Write("Starting updating database...", LogType.Log);
-
+                        Log.Write("Start updating database...", LogType.Log);
+                        BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath(Scripts.DbUpdate));
                         break;
                     case "Back":
                     default:
@@ -124,15 +118,15 @@ public class Program{
                 break;
             case "Run":
                 Log.Write("Start running...", LogType.Log);
-                BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath("BooksiRun.sh"));
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath(Scripts.BooksiRun));
                 break;
             case "AddScripts":
                 Log.Write("Start running and adding scripts...", LogType.Log);
-                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, PathHelper.GetScriptPath("AddScripts.sh"));
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, Scripts.AddScripts);
                 break;
             case "Kill":
                 Log.Write("Start killing...", LogType.Log);
-                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, PathHelper.GetScriptPath("BooksiKill.sh"));
+                BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, Scripts.BooksiKill);
                 break;
             case "Exit":
                 System.Environment.Exit(0);
@@ -151,38 +145,41 @@ public class Program{
             case EnvironmentType.Mac:
                 switch (terminalType){
                     case TerminalType.Internal:
-                        BashRunInInternalTerminal(PathHelper.GetScriptPath("AddScripts.sh"), PathHelper.BashScriptPath);
+                        BashRunInInternalTerminal(path, arguments);
                         break;
                     case TerminalType.External:
-                        BashRunInExternalTerminalMac(PathHelper.GetScriptPath("BooksiRun.sh"));
+                        BashRunInExternalTerminalMac(PathHelper.GetScriptPath(arguments));
                         break;
                 }
                 break;
             case EnvironmentType.Win:
                 switch (terminalType){
                     case TerminalType.Internal:
-                        BashRunInInternalTerminal(PathHelper.GetScriptPath("AddScripts.sh"), PathHelper.BashScriptPath);
+                        BashRunInInternalTerminal(path, arguments);
                         break;
                     case TerminalType.External:
-                        BashRunInExternalTerminalWin(PathHelper.GetScriptPath("BooksiRun.sh"));
+                        BashRunInExternalTerminalWin(PathHelper.GetScriptPath(arguments));
                         break;
                 }
                 break;
         }
     }
     public static void BashRunInInternalTerminal(string path, string arguments){
-        var process = new Process();
+        var processStartInfo = new ProcessStartInfo
+        {
+            FileName = "/bin/bash",
+            Arguments = $"\"{arguments}\"",
+            WorkingDirectory = $"{path}", 
+            UseShellExecute = false,
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            CreateNoWindow = false
+        };
+        
+        using var process = new Process { StartInfo = processStartInfo };
 
-        process.StartInfo.FileName = "/bin/bash";
-        process.StartInfo.Arguments = $"{arguments}";
-        process.StartInfo.WorkingDirectory = $"{path}";
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.RedirectStandardError = true;
-        process.StartInfo.UseShellExecute = false;
-        process.StartInfo.CreateNoWindow = false;
-
-        process.OutputDataReceived += (sender, e) => Log.Write(e.Data, LogType.Log);
-        process.ErrorDataReceived += (sender, e) => Log.Write("ERROR: " + e.Data, LogType.Error);
+        process.OutputDataReceived += (sender, e) => Log.Write("Info:" + e.Data, LogType.Info);
+        process.ErrorDataReceived += (sender, e) => Log.Write("Warning:" + e.Data, LogType.Warning);
 
         process.Start();
         process.BeginOutputReadLine();
@@ -197,7 +194,6 @@ public class Program{
 
     public static void BashRunInExternalTerminalWin(string path){
         Process.Start("open", $"-a Terminal \"{path}\"");
-
     }
 
 #endregion

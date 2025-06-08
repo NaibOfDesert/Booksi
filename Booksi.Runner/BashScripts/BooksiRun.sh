@@ -2,10 +2,14 @@
 
 echo "Started ... BooksiRun.sh"
 
+# Set the directory 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_PATH="$SCRIPT_DIR/../../Booksi/Booksi.csproj"
 
 echo "Using project: $PROJECT_PATH"
+
+# Set environment for production
+export ENVIRONMENT=prod
 
 # Run in background
 dotnet run --project "$PROJECT_PATH" &
