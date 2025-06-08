@@ -3,6 +3,7 @@
 
 chmod +x BooksiRun.sh
 chmod +x BooksiBuild.sh
+chmod +x BooksiKill.sh
 
 echo "Press any key to end..."
 read -n 1 -s
