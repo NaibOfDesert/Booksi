@@ -12,7 +12,7 @@ namespace Booksi.Tools
             Path.GetFullPath(Path.Combine(OutputPath, "../../../"));
 
         public static string BashScriptPath =>
-            Path.Combine(ProjectRoot, "BashScript");
+            Path.Combine(ProjectRoot, "BashScripts");
 
         public static string GetScriptPath(string scriptName) =>
             Path.Combine(BashScriptPath, scriptName);

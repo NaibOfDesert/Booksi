@@ -2,13 +2,13 @@ using System;
 
 public static class Log {
 
-    private static readonly ConsoleColor logForegroundColor  = ConsoleColor.Black;
+    private static readonly ConsoleColor logForegroundColor  = ConsoleColor.Green;
     private static readonly ConsoleColor infoForegroundColor  = ConsoleColor.Blue;
     private static readonly ConsoleColor warningForegroundColor  = ConsoleColor.Yellow;
     private static readonly ConsoleColor successForegroundColor  = ConsoleColor.Green;
     private static readonly ConsoleColor errorForegroundColor  = ConsoleColor.Red;
     private static readonly ConsoleColor selectedForegroundColor  = ConsoleColor.Green;
-    private static readonly ConsoleColor selectedBackgroundColor  = ConsoleColor.Black;
+    private static readonly ConsoleColor selectedBackgroundColor  = ConsoleColor.White;
 
     public static void Clear(){
         Console.Clear();
