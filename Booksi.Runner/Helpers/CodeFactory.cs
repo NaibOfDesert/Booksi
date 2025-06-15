@@ -5,7 +5,7 @@ namespace Booksi.Runner.Helpers;
 
 public static class CodeFactory
 {
-    // private static EnvironmentType environmentType;
+    private static EnvironmentType environmentType;
     // private static ITerminalRunner terminalRunner;
     
     public static void EnvironmentSetUp(EnvironmentType environmentType){
@@ -60,13 +60,14 @@ public static class CodeFactory
             _ => new MainMacTerminalRunner()
         };
     }
-    public static void BashRunInExternalTerminalMac(string path){
-        Process.Start("open", $"-a Terminal \"{path}\"");
-    }
-
-    public static void BashRunInExternalTerminalWin(string path){
-        Process.Start("open", $"-a Terminal \"{path}\"");
-    }
+    
+    // public static void BashRunInExternalTerminalMac(string path){
+    //     Process.Start("open", $"-a Terminal \"{path}\"");
+    // }
+    //
+    // public static void BashRunInExternalTerminalWin(string path){
+    //     Process.Start("open", $"-a Terminal \"{path}\"");
+    // }
     
 
 
