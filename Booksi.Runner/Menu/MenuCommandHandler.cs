@@ -1,12 +1,13 @@
 using Booksi.Runner.Helpers;
+using Booksi.Runner.Menu;
 using Booksi.Tools;
 
 public class MenuCommandHandler
 {
-    private readonly IMenuProvider menuProvider;
-    private static readonly string[] UpMenuOptions = { "BooksiCompose", "DbUpdate", "Back" };
+    private readonly MenuProvider menuProvider;
+    private static readonly UpMenuOption[] UpMenuOptions = { UpMenuOption.BooksiCompose, UpMenuOption.DbUpdate, UpMenuOption.Back };
 
-    public MenuCommandHandler(IMenuProvider menuProvider)
+    public MenuCommandHandler(MenuProvider menuProvider)
     {
         this.menuProvider = menuProvider;
     }
@@ -15,13 +16,13 @@ public class MenuCommandHandler
     {
         switch (command)
         {
-            case "Build":
+            case MainMenuOption.Build.ToString():
                 ExecuteBuild();
                 break;
-            case "Up":
+            case "UP":
                 ExecuteUp();
                 break;
-            case "Run":
+            case "RUN":
                 ExecuteRun();
                 break;
             case "AddScripts":
@@ -45,7 +46,7 @@ public class MenuCommandHandler
     private void ExecuteUp()
     {
         Console.WriteLine("Up\n");
-        var upOption = menuProvider.ShowMenu(UpMenuOptions);
+        var upOption = menuProvider.DisplayMenu(UpMenuOptions);
         
         switch (upOption)
         {

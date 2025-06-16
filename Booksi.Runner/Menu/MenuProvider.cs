@@ -1,6 +1,8 @@
-namespace Booksi.Runner.MenuProviders;
+using Booksi.Tools;
 
-public class MenuProvider : IMenuProvider
+namespace Booksi.Runner.Menu;
+
+public class MenuProvider
 {
     private readonly EnvironmentType environmentType;
     private DisplayMenuDelegate displayMenuDelegate;
@@ -12,6 +14,10 @@ public class MenuProvider : IMenuProvider
         SetMenuDelegate(); 
     }
 
+    public string DisplayMenu(string[] menuList)
+    {
+        return displayMenuDelegate(menuList);
+    }
     private void SetMenuDelegate()
     {
         this.displayMenuDelegate = environmentType switch
@@ -20,32 +26,6 @@ public class MenuProvider : IMenuProvider
             EnvironmentType.Win => DisplayArrowNavigationMenu,
             _ => DisplayTextInputMenu
         };
-    }
-    public string DisplayMenu(string[] menuList)
-    {
-        return displayMenuDelegate(menuList);
-    }
-
-    public string ShowMenu(string[] menuList)
-    {
-        string consoleInput;
-        do
-        {
-            Log.Clear();
-            Log.Write("Write chosen option. Press Enter to go next:\n", LogType.Info);
-            Log.Write("Options:\n", LogType.Warning);
-            
-            foreach (var option in menuList)
-            {
-                Log.Write(option, LogType.Info);
-            }
-            
-            consoleInput = (string)Log.Read(environmentType);
-        }
-        while (!menuList.Contains(consoleInput));
-        
-        Log.Clear();
-        return consoleInput;
     }
     
     private string DisplayTextInputMenu(string[] menuList)

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Booksi.PlaywrightRunner\Booksi.PlaywrightRunner.csproj" />
     <ProjectReference Include="..\Booksi.Tools\Booksi.Tools.csproj" />
   </ItemGroup>
 

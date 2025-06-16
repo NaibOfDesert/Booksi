@@ -1,5 +1,6 @@
 using Booksi.Runner.Helpers;
-using Booksi.Runner.MenuProviders;;
+using Booksi.Runner.Menu;
+using Booksi.Tools;
 
 public class Menu
 {
@@ -13,17 +14,17 @@ public class Menu
         string menuOption;
         do
         {
-            menuOption = menuProvider.ShowMenu(MenuOptions);
+            menuOption = menuProvider.DisplayMenu(MenuOptions);
             menuCommandHandler.ExecuteCommand(menuOption);
         }
         while (menuOption != "Exit");
     }
 
-    private IMenuProvider CreateMenuProvider(string[] args)
+    private MenuProvider CreateMenuProvider(string[] args)
     {
-        var environment = args.Length > 0 && args.Contains(MenuProviderOptions.Win.ToString().ToUpper()) 
-            ? MenuProviderOptions.Win
-            : MenuProviderOptions.Mac;
+        var environment = args.Length > 0 && args.Contains(EnvironmentType.Win.ToString().ToUpper()) 
+            ? EnvironmentType.Win
+            : EnvironmentType.Mac;
         
         CodeFactory.EnvironmentSetUp(environment);
         return new MenuProvider(EnvironmentType.Mac);
