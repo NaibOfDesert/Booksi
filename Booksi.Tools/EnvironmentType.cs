@@ -1,4 +1,4 @@
-namespace Booksi.Runner.MenuProviders;
+namespace Booksi.Tools;
 
 public enum EnvironmentType{
     Mac,

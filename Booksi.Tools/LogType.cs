@@ -1,3 +1,4 @@
+namespace Booksi.Tools;
 public enum LogType{
     Log,
     Info,

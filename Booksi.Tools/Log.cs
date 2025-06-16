@@ -1,5 +1,6 @@
 using System;
 
+namespace Booksi.Tools;
 public static class Log {
 
     private static readonly ConsoleColor logForegroundColor  = ConsoleColor.Green;
