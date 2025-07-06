@@ -1,10 +1,21 @@
-﻿using Booksi.Runner.Helpers;
-using Booksi.Tools;
+﻿using Booksi.Tools;
+using Booksi.Runner.Menu;
+using Booksi.Runner.Code;
+
+namespace Booksi.Runner;
 
 public class Program
 {
-    public void Main(string[] args)
+    public static void Main(string[] args)
     {
-       new Menu().StartMenu(args);
+        try
+        {
+            new MainMenu().StartMenu(args);
+        }
+        catch (Exception ex)
+        {
+            Log.Write($"Application error: {ex.Message}", LogType.Error);
+            Environment.Exit(1);
+        }
     }
 }

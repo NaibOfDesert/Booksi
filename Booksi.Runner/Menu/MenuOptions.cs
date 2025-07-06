@@ -1,3 +1,7 @@
+using System.ComponentModel.DataAnnotations;
+
+namespace Booksi.Runner.Menu;
+
 public enum MainMenuOption
 {
     Build,
@@ -10,7 +14,8 @@ public enum MainMenuOption
 
 public enum UpMenuOption
 {
-    BooksiCompose,
+    Compose,
     DbUpdate,
+    DbUpdateAuto,
     Back
 }

@@ -1,1 +1,0 @@
-// to add console to create, migrate and update database from console

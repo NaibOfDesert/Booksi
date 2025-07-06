@@ -5,7 +5,8 @@ chmod +x BooksiBuild.sh
 chmod +x BooksiCompose.sh
 chmod +x BooksiKill.sh
 chmod +x BooksiRun.sh
-chmod +x DbUpdate.sh
+chmod +x BooksiDbUpdate.sh
+chmod +x BooksiDbUpdateAuto.sh
 
 echo "Press any key to end..."
 read -n 1 -s

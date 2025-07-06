@@ -4,23 +4,23 @@ namespace Booksi.Runner.Menu;
 
 public class MenuProvider
 {
-    private readonly EnvironmentType environmentType;
-    private DisplayMenuDelegate displayMenuDelegate;
+    private readonly EnvironmentType _environmentType;
+    private DisplayMenuDelegate _displayMenuDelegate;
     private delegate string DisplayMenuDelegate(string[] menuList);
 
     public MenuProvider(EnvironmentType environmentType)
     {
-        this.environmentType = environmentType;
+        this._environmentType = environmentType;
         SetMenuDelegate(); 
     }
 
     public string DisplayMenu(string[] menuList)
     {
-        return displayMenuDelegate(menuList);
+        return _displayMenuDelegate(menuList);
     }
     private void SetMenuDelegate()
     {
-        this.displayMenuDelegate = environmentType switch
+        this._displayMenuDelegate = _environmentType switch
         {
             EnvironmentType.Mac => DisplayTextInputMenu,
             EnvironmentType.Win => DisplayArrowNavigationMenu,
@@ -42,7 +42,7 @@ public class MenuProvider
                 Log.Write(option, LogType.Info);
             }
             
-            consoleInput = (string)Log.Read(environmentType);
+            consoleInput = (string)Log.Read(_environmentType);
         }
         while (!menuList.Contains(consoleInput));
         
@@ -67,7 +67,7 @@ public class MenuProvider
                 Log.Write("  " + menuList[i], logType);
             }
 
-            consoleKey = (ConsoleKey)Log.Read(environmentType, true);
+            consoleKey = (ConsoleKey)Log.Read(_environmentType, true);
 
             selectedOptionIndex = consoleKey switch
             {
