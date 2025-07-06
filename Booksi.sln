@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Runner", "Booksi.Run
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Tools", "Booksi.Tools\Booksi.Tools.csproj", "{D1561C30-0434-4F32-ACA2-942519238F13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Booksi.Web", "Booksi.Web\Booksi.Web.csproj", "{78C0A001-6436-4A47-80E1-DA48E6D7511C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{D1561C30-0434-4F32-ACA2-942519238F13}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1561C30-0434-4F32-ACA2-942519238F13}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1561C30-0434-4F32-ACA2-942519238F13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78C0A001-6436-4A47-80E1-DA48E6D7511C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78C0A001-6436-4A47-80E1-DA48E6D7511C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78C0A001-6436-4A47-80E1-DA48E6D7511C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78C0A001-6436-4A47-80E1-DA48E6D7511C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
