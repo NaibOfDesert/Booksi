@@ -10,6 +10,12 @@ public static class PathHelper
     public static string ProjectRoot =>
         Path.GetFullPath(Path.Combine(OutputPath, "../../../"));
 
+    private static string GetBashScriptPath()
+    {
+        var currentDirectory = Directory.GetCurrentDirectory();
+        return Path.Combine(currentDirectory, "Scripts");
+    }
+    
     public static string BashScriptPath =>
         Path.Combine(ProjectRoot, "BashScripts");
 
