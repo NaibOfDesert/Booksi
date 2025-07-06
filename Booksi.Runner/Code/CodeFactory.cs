@@ -68,24 +68,25 @@ public static class CodeFactory
             Arguments = $"\"{scriptPath}\"",
             WorkingDirectory = path,
             UseShellExecute = false,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            CreateNoWindow = true
+            RedirectStandardOutput = false,
+            RedirectStandardError = false,
+            CreateNoWindow = false
         };
 
         using var process = Process.Start(processStartInfo);
         if (process != null)
         {
-            var output = process.StandardOutput.ReadToEnd();
-            var error = process.StandardError.ReadToEnd();
+            // INFO: to read output from process use:
+            // var output = process.StandardOutput.ReadToEnd();
+            // var error = process.StandardError.ReadToEnd();
             
             process.WaitForExit();
             
-            if (!string.IsNullOrEmpty(output))
-                Log.Write(output, LogType.Log);
-            
-            if (!string.IsNullOrEmpty(error))
-                Log.Write(error, LogType.Error);
+            // if (!string.IsNullOrEmpty(output))
+            //     Log.Write(output, LogType.Log);
+            //
+            // if (!string.IsNullOrEmpty(error))
+            //     Log.Write(error, LogType.Error);
                 
             Log.Write($"Process exited with code: {process.ExitCode}", LogType.Info);
         }
@@ -93,7 +94,7 @@ public static class CodeFactory
 
     private static void RunExternalTerminalMac(string path, string arguments)
     {
-        var scriptPath = Path.Combine(path, $"{arguments}.sh");
+        var scriptPath = Path.Combine(path, $"{arguments}");
         
         var processStartInfo = new ProcessStartInfo
         {
@@ -109,7 +110,7 @@ public static class CodeFactory
 
     private static void RunExternalTerminalWin(string path, string arguments)
     {
-        var scriptPath = Path.Combine(path, $"{arguments}.sh");
+        var scriptPath = Path.Combine(path, $"{arguments}");
         
         var processStartInfo = new ProcessStartInfo
         {

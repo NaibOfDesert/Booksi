@@ -43,6 +43,6 @@ public class MainMenu
             : EnvironmentType.Mac;
         
         CodeFactory.EnvironmentSetUp(environment);
-        return new MenuProvider(EnvironmentType.Mac);
+        return new MenuProvider(environment);
     }
 }

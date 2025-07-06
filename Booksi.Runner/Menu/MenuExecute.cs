@@ -50,7 +50,7 @@ public class MenuExecute
     private void ExecuteBuild()
     {
         Log.Write("Starting building...", LogType.Log);
-        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.BashScriptPath, CodeScripts.BooksiBuild);
+        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.BooksiBuild);
     }
 
     private void ExecuteUp()
@@ -72,11 +72,11 @@ public class MenuExecute
                         break;
                     case UpMenuOption.DbUpdate:
                         Log.Write("Start updating database...", LogType.Log);
-                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath(CodeScripts.BooksiDbUpdate));
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.BooksiDbUpdate));
                         break;  
                     case UpMenuOption.DbUpdateAuto:
                         Log.Write("Start updating database...", LogType.Log);
-                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath(CodeScripts.BooksiDbUpdateAuto));
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.BooksiDbUpdateAuto));
                         break;
                     case UpMenuOption.Back:
                         Log.Write("Returning to main menu...", LogType.Info);
@@ -90,7 +90,7 @@ public class MenuExecute
     private void ExecuteRun()
     {
         Log.Write("Start running...", LogType.Log);
-        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.External, PathHelper.GetScriptPath(CodeScripts.BooksiRun));
+        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.BooksiRun));
     }
 
     private void ExecuteAddScripts()
