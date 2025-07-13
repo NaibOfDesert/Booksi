@@ -1,11 +1,11 @@
-using System;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using Microsoft.Playwright;
+
+namespace Booksi.PlaywrightRunner.Tests;
+
 public class TestClick : Test{
     public string Description {get; set;} = "";
     public static async Task ClickButton(){
-        Info.InfoTest("Test ClickButtonStarted");
+        Info.Info.InfoTest("Test ClickButtonStarted");
 
 
         using var playwright = await Playwright.CreateAsync();
@@ -28,11 +28,11 @@ public class TestClick : Test{
     
         if (resultText.Contains("You clicked the button"))
         {
-            Info.InfoTestPass("Test ClickButtonStarted passed");
+            Info.Info.InfoTestPass("Test ClickButtonStarted passed");
         }
         else
         {
-            Info.InfoTestFail("Test ClickButtonStarted vailed");
+            Info.Info.InfoTestFail("Test ClickButtonStarted vailed");
         }
 
         

@@ -1,4 +1,4 @@
-using System;
+namespace Booksi.PlaywrightRunner.Info;
 
 public static class Info{
     public static void InfoRun(string text) {
@@ -19,7 +19,7 @@ public static class Info{
 
     }
 
-        public static void InfoTestPass(string text) {
+    public static void InfoTestPass(string text) {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Write("Test: ");
         Console.ResetColor();
@@ -28,7 +28,7 @@ public static class Info{
 
     }
 
-        public static void InfoTestFail(string text) {
+    public static void InfoTestFail(string text) {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.Write("Test: ");
         Console.ResetColor();

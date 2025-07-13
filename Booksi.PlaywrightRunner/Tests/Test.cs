@@ -1,6 +1,5 @@
-using System;
-using System.Threading.Tasks;
-using Microsoft.Playwright;
+namespace Booksi.PlaywrightRunner.Tests;
+
 public class Test{
     public string Description {get; set;}
 }
