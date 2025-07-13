@@ -6,9 +6,11 @@ namespace Booksi.Runner.Menu;
 
 public class MenuExecute
 {
-    private readonly MenuProvider menuProvider;
-    private static readonly UpMenuOption[] UpMenuOptions = {
+    private readonly MenuProvider _menuProvider;
+    private readonly UpMenuOption[] _upMenuOptions = {
         UpMenuOption.Compose, 
+        UpMenuOption.DbMigrationAdd,
+        UpMenuOption.DbMigrationRemove,
         UpMenuOption.DbUpdate, 
         UpMenuOption.DbUpdateAuto,
         UpMenuOption.Back
@@ -16,7 +18,7 @@ public class MenuExecute
 
     public MenuExecute(MenuProvider menuProvider)
     {
-        this.menuProvider = menuProvider;
+        this._menuProvider = menuProvider;
     }
 
     public void ExecuteCommand(string command)
@@ -50,7 +52,7 @@ public class MenuExecute
     private void ExecuteBuild()
     {
         Log.Write("Starting building...", LogType.Log);
-        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.BooksiBuild);
+        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.Build);
     }
 
     private void ExecuteUp()
@@ -59,8 +61,8 @@ public class MenuExecute
         do
         {
             Console.WriteLine("Up Menu\n");
-            var upOptionsAsStrings = UpMenuOptions.Select(x => x.ToString()).ToArray();
-            upOption = menuProvider.DisplayMenu(upOptionsAsStrings);
+            var upOptionsAsStrings = _upMenuOptions.Select(x => x.ToString()).ToArray();
+            upOption = _menuProvider.DisplayMenu(upOptionsAsStrings);
         
             if (Enum.TryParse<UpMenuOption>(upOption, out var upMenuOption))
             {
@@ -68,15 +70,23 @@ public class MenuExecute
                 {
                     case UpMenuOption.Compose:
                         Log.Write("Start composing Booksi docker image...", LogType.Log);
-                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.BooksiCompose);
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.Compose);
                         break;
+                    case UpMenuOption.DbMigrationAdd:
+                        Log.Write("Start adding migration...", LogType.Log);
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.DbMigrationAdd));
+                        break; 
+                    case UpMenuOption.DbMigrationRemove:
+                        Log.Write("Start removing migration...", LogType.Log);
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.DbMigrationRemove));
+                        break; 
                     case UpMenuOption.DbUpdate:
                         Log.Write("Start updating database...", LogType.Log);
-                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.BooksiDbUpdate));
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.DbUpdate));
                         break;  
                     case UpMenuOption.DbUpdateAuto:
                         Log.Write("Start updating database...", LogType.Log);
-                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.BooksiDbUpdateAuto));
+                        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.DbUpdateAuto));
                         break;
                     case UpMenuOption.Back:
                         Log.Write("Returning to main menu...", LogType.Info);
@@ -84,13 +94,12 @@ public class MenuExecute
                 }
             }
         } while (upOption != UpMenuOption.Back.ToString());
-        
     }
 
     private void ExecuteRun()
     {
         Log.Write("Start running...", LogType.Log);
-        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.BooksiRun));
+        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.GetScriptPath(CodeScripts.Run));
     }
 
     private void ExecuteAddScripts()
@@ -102,6 +111,6 @@ public class MenuExecute
     private void ExecuteKill()
     {
         Log.Write("Start killing...", LogType.Log);
-        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.BooksiKill);
+        CodeFactory.BashSelectEnvironmentAndTerminalAndRun(TerminalType.Internal, PathHelper.BashScriptPath, CodeScripts.Kill);
     }
 }

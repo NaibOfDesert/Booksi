@@ -10,7 +10,7 @@ public class MenuProvider
 
     public MenuProvider(EnvironmentType environmentType)
     {
-        this._environmentType = environmentType;
+        _environmentType = environmentType;
         SetMenuDelegate(); 
     }
 
@@ -20,7 +20,7 @@ public class MenuProvider
     }
     private void SetMenuDelegate()
     {
-        this._displayMenuDelegate = _environmentType switch
+        _displayMenuDelegate = _environmentType switch
         {
             EnvironmentType.Mac => DisplayTextInputMenu,
             EnvironmentType.Win => DisplayArrowNavigationMenu,

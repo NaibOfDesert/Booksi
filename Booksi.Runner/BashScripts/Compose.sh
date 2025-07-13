@@ -9,9 +9,6 @@ DOCKER_DIR="$SCRIPT_DIR/../../Booksi"
 # Change to that directory
 cd "$DOCKER_DIR" || { echo "Directory not found: $DOCKER_DIR"; exit 1; }
 
-# Set environment for production
-export ENVIRONMENT=prod
-
 # Build docker images without running containers
 echo "Building Docker images..."
 docker compose build

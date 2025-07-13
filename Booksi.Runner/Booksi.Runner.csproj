@@ -4,6 +4,10 @@
     <ProjectReference Include="..\Booksi.Tools\Booksi.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="OutputLogs\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>

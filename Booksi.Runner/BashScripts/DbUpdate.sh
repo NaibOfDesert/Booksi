@@ -5,9 +5,6 @@ echo "Started ... BooksiDbUpdate.sh"
 # Set the directory 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"  
 
-# Set environment for production
-export ENVIRONMENT=prod
-
 # Project paths
 MAIN_PROJECT_PATH="$SCRIPT_DIR/../../Booksi/Booksi.csproj"
 MIGRATIONS_PROJECT_PATH="$SCRIPT_DIR/../../Booksi.Data/Booksi.Data.csproj"

@@ -4,7 +4,7 @@ using Booksi.Tools;
 namespace Booksi.Runner.Menu;
 public class MainMenu
 {
-    private readonly MainMenuOption[] MenuOptions = { 
+    private readonly MainMenuOption[] _menuOptions = { 
         MainMenuOption.Build, 
         MainMenuOption.Up, 
         MainMenuOption.Run, 
@@ -22,7 +22,7 @@ public class MainMenu
         string menuOption;
         do
         {
-            var menuOptionsAsStrings = MenuOptions.Select(x => x.ToString()).ToArray();
+            var menuOptionsAsStrings = _menuOptions.Select(x => x.ToString()).ToArray();
             menuOption = menuProvider.DisplayMenu(menuOptionsAsStrings);
             menuCommandHandler.ExecuteCommand(menuOption);
         }

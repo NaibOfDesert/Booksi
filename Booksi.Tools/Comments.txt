@@ -1,0 +1,46 @@
+📁 General Instructions / Structure
+📌	Important note / key instruction
+🧭	Project navigation
+🗂️	File or project structure
+🧱	Application module / layer
+
+🛠️ Development & Build
+🧪	Testing
+🧰	Developer tools
+🧼	Cleaning (e.g., dotnet clean)
+🏗️	Building (e.g., compile, migrate)
+🧱	Compilation
+
+🧪 Testing & Debugging
+🐞	Bug / debugging
+🔍	Inspect / investigate
+❌	Error / failed test
+✅	Passed test / success
+
+🐳 Docker / Containerization
+🧩	Microservice / component
+🔌	Connection between containers
+📦	Docker image
+
+💾 Database / Migrations
+🏗️	Create migration
+🛠️	Update database
+📊	Data / records
+
+🧭 Running / Environments
+▶️	Run command (dotnet run, etc.)
+💻	Local machine (host)
+🐧	Linux / Unix
+🪟	Windows
+🍎	macOS
+🔁	Restart / rerun
+
+🌍 Other / Networking / Configuration
+🌐	Network / Internet
+🔒	Security / authentication
+🔧	Configuration
+⚙️	Settings
+📄	Config file (e.g., appsettings.json)
+🌱	Development environment
+🚀	Production / deployment
+

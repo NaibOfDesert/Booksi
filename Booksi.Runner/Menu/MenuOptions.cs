@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace Booksi.Runner.Menu;
 
 public enum MainMenuOption
@@ -15,6 +13,8 @@ public enum MainMenuOption
 public enum UpMenuOption
 {
     Compose,
+    DbMigrationAdd,
+    DbMigrationRemove,
     DbUpdate,
     DbUpdateAuto,
     Back
